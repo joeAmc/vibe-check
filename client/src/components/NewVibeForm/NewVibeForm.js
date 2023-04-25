@@ -88,8 +88,9 @@ const NewVibeForm = () => {
   return (
     <div className="new-vibe-form-container">
       <Nav />
-      <h1>Vibe Check In</h1>
-      <h4>Add a Venue</h4>
+      <div className="spacer" />
+      {/* <h1>Vibe Check In</h1>
+      <h4>Add a Venue</h4> */}
       {showAlert && (
         <NewVibeAlert
           text={alertMessage}
