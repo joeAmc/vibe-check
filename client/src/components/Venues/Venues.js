@@ -41,9 +41,8 @@ const Venues = () => {
 
   return (
     <div>
-      <Nav />
-      <h1>{type}'s</h1>
-      <h4>Search local vibes</h4>
+      <Nav type={type} />
+      <div className="spacer" />
       <div className="venues">
         {venues
           .filter((venue) => venue.type === type && venue.vibes >= 0)

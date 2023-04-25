@@ -11,15 +11,32 @@
   z-index: 1;
   padding: 20px 32px;
   box-shadow: var(--box-shadow);
+  transition: 0.3s linear;
+}
+
+.hidden {
+  /* height: 4rem; */
+  width: -webkit-fill-available;
+  z-index: 1;
+  box-shadow: var(--box-shadow);
+  position: fixed;
+  top: -110px;
+  transition: 0.3s linear;
 }
 
 .icons {
-  font-size: 28px;
+  font-size: 38px;
   padding-left: 10px;
   color: white;
+  display: flex;
+  align-items: center;
+}
+
+.icons svg {
+  cursor: pointer;
 }
 
 #root > div > div > div > div.icons > svg:nth-child(2) {
   margin-left: 10px;
-  font-size: 28px;
+  /* font-size: 28px; */
 }
