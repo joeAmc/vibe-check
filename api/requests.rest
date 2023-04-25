@@ -1,0 +1,47 @@
+GET http://localhost:3002/venues
+
+###
+
+POST http://localhost:3002/venue/new
+Content-Type: application/json
+
+{
+  "type": "Cosy Pub",
+  "name": "The Royal Oak",
+  "location": "London"
+}
+
+###
+
+DELETE http://localhost:3002/venue/delete/6429ee0889a53f136c1f0811
+
+###
+
+PUT http://localhost:3002/vibe/6429e20c89a53f136c1f07e9
+
+###
+
+GET  http://localhost:3002/users
+
+###
+
+POST http://localhost:3002/user/new
+Content-Type: application/json
+
+{
+  "username": "SilkyBoy",
+  "email": "joe+1@gmail.com"
+}
+
+###
+
+DELETE http://localhost:3002/user/delete/643471bdb737979400b6e794
+
+###
+
+PUT http://localhost:3002/user/6434739bce409558743bfee9
+Content-Type: application/json
+
+{
+  "type": "Club Night"
+}
