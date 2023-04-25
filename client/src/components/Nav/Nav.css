@@ -8,7 +8,7 @@
   width: -webkit-fill-available;
   /* background-color: rgba(5, 5, 5, 0.7);
   backdrop-filter: blur(5px); */
-  background-color: var(--darkgs);
+  background-color: var(--dark);
   z-index: 1;
   padding: 20px 32px;
   transition: 0.3s linear;
