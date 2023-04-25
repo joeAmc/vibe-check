@@ -36,8 +36,7 @@ const VibeChoice = () => {
   return (
     <div>
       <Nav />
-      <h1>Pick Your Vibe</h1>
-      <h4>Swipe And Choose</h4>
+      <div className="spacer" />
       <div className="choice-container">
         <div className={`types ${extraClass}`}>
           <Swiper

@@ -69,7 +69,7 @@ const NewVibeForm = () => {
 
         if (response.ok) {
           console.log("New Vibe added successfully!");
-          setAlertMessage("New Vibe added successfully!");
+          setAlertMessage("New Vibe added!");
           setAlertClass("success");
         } else {
           console.error("Failed to add Vibe");

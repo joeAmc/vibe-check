@@ -6,19 +6,17 @@
   right: 0;
   top: 0;
   width: -webkit-fill-available;
-  /* background-color: green; */
-  background-color: var(--dark-alt);
+  background-color: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(5px);
   z-index: 1;
   padding: 20px 32px;
-  box-shadow: var(--box-shadow);
   transition: 0.3s linear;
 }
 
 .hidden {
-  /* height: 4rem; */
   width: -webkit-fill-available;
   z-index: 1;
-  box-shadow: var(--box-shadow);
+  /* box-shadow: var(--box-shadow); */
   position: fixed;
   top: -110px;
   transition: 0.3s linear;

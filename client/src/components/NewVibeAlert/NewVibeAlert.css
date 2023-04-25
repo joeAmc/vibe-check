@@ -10,7 +10,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 3;
 }
 
 .alert p {
@@ -51,4 +51,5 @@
   background-color: rgba(5, 5, 5, 0.7);
   backdrop-filter: blur(1px);
   filter: blur(5px);
+  z-index: 2;
 }
