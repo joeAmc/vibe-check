@@ -1,0 +1,61 @@
+.venue-container {
+  position: relative;
+  background-color: var(--dark);
+  padding: 24px 16px;
+  margin-bottom: 32px;
+  border-radius: var(--border-radius);
+  align-items: center;
+  max-width: 700px;
+}
+
+.venue-container h2 {
+  font-size: 28px;
+}
+
+.venue-img {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 300px;
+  border-radius: var(--border-radius);
+  display: flex;
+}
+
+.venue-img img {
+  width: 100%;
+  transition: all 0.6s;
+}
+
+.name {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.name h4 {
+  margin-bottom: 16px;
+  margin-left: 16px;
+}
+
+.vibe-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.vibe-votes {
+  display: flex;
+  align-items: center;
+}
+.vibe-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  border-radius: 999px;
+  background-color: var(--primary);
+  background-image: linear-gradient(
+    to bottom,
+    var(--primary),
+    var(--secondary)
+  );
+}

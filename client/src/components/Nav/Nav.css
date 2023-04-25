@@ -1,0 +1,25 @@
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: -webkit-fill-available;
+  /* background-color: green; */
+  background-color: var(--dark-alt);
+  z-index: 1;
+  padding: 20px 32px;
+  box-shadow: var(--box-shadow);
+}
+
+.icons {
+  font-size: 28px;
+  padding-left: 10px;
+  color: white;
+}
+
+#root > div > div > div > div.icons > svg:nth-child(2) {
+  margin-left: 10px;
+  font-size: 28px;
+}

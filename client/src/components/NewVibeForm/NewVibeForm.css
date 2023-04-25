@@ -1,0 +1,60 @@
+.new-vibe-form-container {
+  position: relative;
+}
+
+form {
+  margin-top: 32px;
+  background-color: var(--dark);
+  padding: 32px;
+  margin-bottom: 32px;
+  border-radius: var(--border-radius);
+  align-items: center;
+}
+
+input,
+label,
+select {
+  display: block;
+}
+
+input,
+select {
+  margin-top: 12px;
+  padding: 8px;
+  height: 38px;
+  border-radius: var(--border-radius);
+  background-color: var(--light-alt);
+  border: none;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+}
+
+label {
+  font-size: 24px;
+}
+
+input {
+  font-size: 18px;
+}
+
+#root > div > div > form > label:nth-child(1) > input[type="text"] {
+  cursor: default;
+}
+
+#root > div > div > form > label:nth-child(6) > input[type="file"] {
+  width: 100%;
+}
+
+#root > div > div > form > label:nth-child(6) > input[type="file"] {
+  background-color: var(--dark);
+  padding: 0;
+}
+
+#root > div > div > form > label:nth-child(6) {
+  margin-top: 18px;
+}
+
+#file-upload-button {
+  background-color: var(--light-alt);
+}

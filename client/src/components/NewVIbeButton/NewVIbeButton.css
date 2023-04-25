@@ -1,0 +1,23 @@
+.new-vibe-btn {
+  background-color: red;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  background-image: linear-gradient(to bottom, #fa0404, #f69205);
+  bottom: 23px;
+  right: 0;
+  margin-top: -9em;
+  margin-right: 32px;
+  position: fixed;
+}
+
+.new-vibe-btn a {
+  font-size: 32px;
+  height: 32px;
+  color: white;
+}
