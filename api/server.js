@@ -53,6 +53,14 @@ app.delete("/venue/delete/:id", async (req, res) => {
   res.json(result);
 });
 
+app.delete("/venue/deleteall", async (req, res) => {
+  const result = await Venue.deleteMany({
+    type: "Bar With Dancing",
+  });
+
+  res.json(result);
+});
+
 app.put("/venue/:id", async (req, res) => {
   const venue = await Venue.findById(req.params.id);
 

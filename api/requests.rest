@@ -13,11 +13,13 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3002/venue/delete/6429ee0889a53f136c1f0811
-
+DELETE http://localhost:3002/venue/delete/64483b0a84364d59184beb66
 ###
 
-PUT http://localhost:3002/vibe/6429e20c89a53f136c1f07e9
+DELETE http://localhost:3002/venue/deleteall
+###
+
+PUT http://localhost:3002/vibe/64307eddd35eef75d558d464
 
 ###
 

@@ -34,7 +34,7 @@ const Nav = ({ type }) => {
     <div className={`nav-container ${!show && "hidden"}`}>
       <div className="nav-text">
         <h1>{`${type}'s`}</h1>
-        <h4>Search For Your Vibe</h4>
+        <h4>FInd Your Vibe</h4>
       </div>
       <div className="icons">
         <BiHomeAlt onClick={homeIconHandler} />
