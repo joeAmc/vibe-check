@@ -6,21 +6,19 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import NewVibeAlert from "../NewVibeAlert/NewVibeAlert";
 import Nav from "../Nav/Nav";
+import { Bars } from "react-loader-spinner";
 
 const NewVibeForm = () => {
   const { type } = useParams();
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
+  const [loading, setLoading] = useState(false);
   // need to look at how to set the vibe better!
   const [vibes, setVibes] = useState("0");
   const [image, setImage] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertClass, setAlertClass] = useState("x");
-
-  // const handleTypeChange = (event) => {
-  //   setType(event.target.value);
-  // };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -40,7 +38,7 @@ const NewVibeForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true);
     !image && console.log("Please add an image");
 
     const imageRef = ref(storage, `images/${image.name + v4()}`);
@@ -82,6 +80,7 @@ const NewVibeForm = () => {
         setAlertClass("fail");
       }
       setShowAlert(true);
+      setLoading(false);
     });
   };
 
@@ -95,6 +94,22 @@ const NewVibeForm = () => {
           backgroundColor={alertClass}
           type={type}
         />
+      )}
+      {loading && (
+        <>
+          <div className="loader">
+            <Bars
+              height="80"
+              width="80"
+              radius="9"
+              color="var(--primary)"
+              ariaLabel="bars-loading"
+              wrapperStyle
+              wrapperClass
+            />
+          </div>
+          <div className="alert-backdrop"></div>
+        </>
       )}
       <form onSubmit={handleSubmit}>
         <label>

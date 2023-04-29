@@ -3,12 +3,14 @@ import { useState } from "react";
 import "./Signup.css";
 import { useNavigate } from "react-router-dom";
 import Nav from "../Nav/Nav";
+import { Bars } from "react-loader-spinner";
 
 const Signup = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleUserNameChange = (event) => {
@@ -25,6 +27,7 @@ const Signup = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     const newUserData = {
       username: username,
@@ -51,6 +54,7 @@ const Signup = () => {
     } catch (error) {
       console.error(`Failed to add User." : ${error}`);
     }
+    setLoading(false);
   };
 
   function switchAuthHandler() {
@@ -61,6 +65,22 @@ const Signup = () => {
     <div className="signup-container">
       <Nav />
       <div className="spacer" />
+      {loading && (
+        <>
+          <div className="loader">
+            <Bars
+              height="80"
+              width="80"
+              radius="9"
+              color="var(--primary)"
+              ariaLabel="bars-loading"
+              wrapperStyle
+              wrapperClass
+            />
+          </div>
+          <div className="alert-backdrop"></div>
+        </>
+      )}
       <form onSubmit={handleSubmit}>
         <p>
           <label htmlFor="username">User Name</label>
