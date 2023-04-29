@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "./Signup.css";
 import { useNavigate } from "react-router-dom";
+import Nav from "../Nav/Nav";
 
 const Signup = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -58,8 +59,8 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      <h1>{isLogin ? "Log in" : "Sign up"}</h1>
-      <h4>For Vibes</h4>
+      <Nav />
+      <div className="spacer" />
       <form onSubmit={handleSubmit}>
         <p>
           <label htmlFor="username">User Name</label>

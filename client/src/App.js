@@ -11,7 +11,6 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<VibeChoice />} />
-        {/* <Route path="/venues" element={<Venues />} /> */}
         <Route path="/venues/:type" element={<Venues />} />
         <Route path="/new-vibe/:type" element={<NewVibeForm />} />
         <Route path="/sign-up" element={<Signup />} />

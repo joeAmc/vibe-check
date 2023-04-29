@@ -9,6 +9,7 @@ import Nav from "../Nav/Nav";
 const Venues = () => {
   const { type } = useParams();
   const [venues, setVenues] = useState([]);
+  const removeUnderScoreFromType = type.replaceAll("_", " ");
 
   useEffect(() => {
     getVenues();
@@ -37,11 +38,9 @@ const Venues = () => {
     return hourMins.slice(0, -6) + hourMins.slice(-2);
   };
 
-  console.log({ venues });
-
   return (
     <div>
-      <Nav type={type} />
+      <Nav venuesType={type} formatedType={removeUnderScoreFromType} />
       <div className="spacer" />
       <div className="venues">
         {venues

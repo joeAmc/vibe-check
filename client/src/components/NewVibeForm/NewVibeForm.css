@@ -5,7 +5,6 @@
 form {
   background-color: var(--dark);
   padding: 32px;
-  margin-bottom: 32px;
   border-radius: var(--border-radius);
   align-items: center;
 }

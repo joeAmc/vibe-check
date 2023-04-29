@@ -23,7 +23,8 @@ const VibeChoice = () => {
   const navigate = useNavigate();
 
   const handleSelect = (type) => {
-    navigate(`/venues/${type}`);
+    const formatedType = type.replaceAll(" ", "_");
+    navigate(`/venues/${formatedType}`);
   };
 
   const handleSlideChange = (swiper) => {
