@@ -1,0 +1,17 @@
+.signup-container form input {
+  margin-bottom: 18px;
+}
+
+.signup-container button {
+  margin-top: 18px;
+}
+
+.signup-text {
+  margin-top: 18px;
+}
+
+.signup-text h5 {
+  margin-top: 8px;
+  color: var(--light);
+  cursor: pointer;
+}

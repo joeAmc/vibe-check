@@ -21,10 +21,11 @@ const VibeChoice = () => {
   const [extraClass, setExtraClass] = useState();
   const [selectedType, setSelectedType] = useState("Cosy Pub");
   const navigate = useNavigate();
+  const loggedIn = false;
 
   const handleSelect = (type) => {
     const formatedType = type.replaceAll(" ", "_");
-    navigate(`/venues/${formatedType}`);
+    navigate(loggedIn ? `/venues/${formatedType}` : `/auth`);
   };
 
   const handleSlideChange = (swiper) => {

@@ -114,7 +114,7 @@ const NewVibeForm = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Vibe Type
-          <input type="text" value={type} readOnly />
+          <input type="text" value={type.replaceAll("_", " ")} readOnly />
         </label>
         <br />
         <label>

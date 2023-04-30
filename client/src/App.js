@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Venues from "./components/Venues/Venues";
 import NewVibeForm from "./components/NewVibeForm/NewVibeForm";
 import VibeChoice from "./components/VibeChoice/VibeChoice";
-import Signup from "./components/Signup/Signup";
+import Auth from "./components/Auth/Auth";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<VibeChoice />} />
         <Route path="/venues/:type" element={<Venues />} />
         <Route path="/new-vibe/:type" element={<NewVibeForm />} />
-        <Route path="/sign-up" element={<Signup />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </div>
   );

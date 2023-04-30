@@ -5,10 +5,11 @@ import "./Nav.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 
-const Nav = ({ venuesType, newVibetype, formatedType }) => {
+const Nav = ({ venuesType, newVibetype, formatedType, signup }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [show, setShow] = useState(true);
+  const loggedIn = true;
 
   useEffect(() => {
     let previousScrollPosition = 0;
@@ -55,15 +56,12 @@ const Nav = ({ venuesType, newVibetype, formatedType }) => {
     } else {
       return (
         <div className="nav-text">
-          <h1>Sign Up</h1>
-          <h4>Vibe Source</h4>
+          {!signup ? <h1>Sign Up</h1> : <h1>Log In</h1>}
+          <h4>for vibes</h4>
         </div>
       );
     }
   };
-
-  console.log({ venuesType });
-  console.log(location.pathname);
 
   return (
     <div
@@ -74,7 +72,7 @@ const Nav = ({ venuesType, newVibetype, formatedType }) => {
       {navText()}
       <div className="icons">
         <BiHomeAlt onClick={homeIconHandler} />
-        <CgProfile onClick={homeIconHandler} />
+        {!loggedIn && <CgProfile onClick={homeIconHandler} />}
       </div>
     </div>
   );

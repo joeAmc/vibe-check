@@ -1,17 +1,21 @@
 import React from "react";
 import { useState } from "react";
-import "./Signup.css";
+import "./Auth.css";
 import { useNavigate } from "react-router-dom";
 import Nav from "../Nav/Nav";
 import { Bars } from "react-loader-spinner";
 
-const Signup = () => {
-  const [isLogin, setIsLogin] = useState(true);
+const Auth = () => {
+  const [signUp, setSignUp] = useState(false);
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleSignUp = () => {
+    setSignUp((isCurrentlyLogin) => !isCurrentlyLogin);
+  };
 
   const handleUserNameChange = (event) => {
     setUserName(event.target.value);
@@ -58,12 +62,12 @@ const Signup = () => {
   };
 
   function switchAuthHandler() {
-    setIsLogin((isCurrentlyLogin) => !isCurrentlyLogin);
+    setSignUp((isCurrentlyLogin) => !isCurrentlyLogin);
   }
 
   return (
     <div className="signup-container">
-      <Nav />
+      <Nav signup={signUp} />
       <div className="spacer" />
       {loading && (
         <>
@@ -114,12 +118,19 @@ const Signup = () => {
         </p>
         <div>
           <button onClick={switchAuthHandler} type="submit">
-            {!isLogin ? "Sign up!" : "Login"}
+            {!signUp ? "Sign up" : "Log in"}
           </button>
+        </div>
+
+        <div className="signup-text">
+          <h4>
+            {!signUp ? "Already have an account?" : "Don't have an account?"}
+          </h4>
+          <h5 onClick={handleSignUp}>{!signUp ? "Log in" : "Sign up"}</h5>
         </div>
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default Auth;

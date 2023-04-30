@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import pubImage from "../../assets/kenton.jpg";
 import "./Venues.css";
 import NewVIbeButton from "../NewVIbeButton/NewVIbeButton";
 import Nav from "../Nav/Nav";
@@ -37,6 +36,8 @@ const Venues = () => {
     const hourMins = new Date(d).toLocaleTimeString("en-US").toString();
     return hourMins.slice(0, -6) + hourMins.slice(-2);
   };
+
+  console.log(venues);
 
   return (
     <div>
