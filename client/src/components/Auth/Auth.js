@@ -1,21 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import "./Auth.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import Nav from "../Nav/Nav";
 import { Bars } from "react-loader-spinner";
 
 const Auth = () => {
-  const [signUp, setSignUp] = useState(false);
+  // const [signUp, setSignUp] = useState(false);
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleSignUp = () => {
-    setSignUp((isCurrentlyLogin) => !isCurrentlyLogin);
-  };
+  const [searchParams] = useSearchParams();
+  const signUp = searchParams.get("mode") === "signup";
 
   const handleUserNameChange = (event) => {
     setUserName(event.target.value);
@@ -32,6 +30,7 @@ const Auth = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
+    console.log("submitting");
 
     const newUserData = {
       username: username,
@@ -61,9 +60,10 @@ const Auth = () => {
     setLoading(false);
   };
 
-  function switchAuthHandler() {
-    setSignUp((isCurrentlyLogin) => !isCurrentlyLogin);
-  }
+  // function switchAuthHandler() {
+  //   setSignUp((isCurrentlyLogin) => !isCurrentlyLogin);
+  // }
+  console.log(signUp);
 
   return (
     <div className="signup-container">
@@ -117,16 +117,16 @@ const Auth = () => {
           />
         </p>
         <div>
-          <button onClick={switchAuthHandler} type="submit">
-            {!signUp ? "Sign up" : "Log in"}
-          </button>
+          <Link to={`?mode=${!signUp ? "signup" : "login"}`}>
+            <button type="submit">{!signUp ? "Sign up" : "Log in"}</button>
+          </Link>
         </div>
 
         <div className="signup-text">
           <h4>
             {!signUp ? "Already have an account?" : "Don't have an account?"}
           </h4>
-          <h5 onClick={handleSignUp}>{!signUp ? "Log in" : "Sign up"}</h5>
+          <h5>{!signUp ? "Log in" : "Sign up"}</h5>
         </div>
       </form>
     </div>

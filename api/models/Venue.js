@@ -8,7 +8,12 @@ const venueSchema = new Schema({
   vibes: { type: String, default: "1" },
   image: { type: String, required: true },
   timestamp: { type: String, default: Date.now },
-  // createdAt: { type: Date, expires: "60m", default: Date.now },
+  // createAt: {
+  //   type: Date,
+  //   default: Date.now(),
+  //   index: { expires: "3600s" },
+  // },
+  // expireAt: { type: Date, default: Date.now, index: { expires: "10s" } },
 });
 
 const Venue = mongoose.model("Venue", venueSchema);

@@ -55,7 +55,7 @@ app.delete("/venue/delete/:id", async (req, res) => {
 
 app.delete("/venue/deleteall", async (req, res) => {
   const result = await Venue.deleteMany({
-    type: "Bar With Dancing",
+    type: "Cosy_Pub",
   });
 
   res.json(result);
