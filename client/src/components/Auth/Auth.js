@@ -126,7 +126,9 @@ const Auth = () => {
           <h4>
             {!signUp ? "Already have an account?" : "Don't have an account?"}
           </h4>
-          <h5>{!signUp ? "Log in" : "Sign up"}</h5>
+          <Link to={`?mode=${!signUp ? "signup" : "login"}`}>
+            <h5>{!signUp ? "Log in" : "Sign up"}</h5>
+          </Link>
         </div>
       </form>
     </div>

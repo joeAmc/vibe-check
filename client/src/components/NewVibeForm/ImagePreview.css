@@ -1,0 +1,25 @@
+.image-preview-container {
+  position: relative;
+  text-align: center;
+}
+
+.image-preview-container > img {
+  width: 768px;
+}
+
+@media (max-width: 768px) {
+  .image-preview-container > img {
+    width: 100%;
+  }
+}
+
+/* fullscreen enable by props */
+.image-preview-container-fullscreen > img {
+  width: 100vw;
+  height: 100vh;
+}
+
+.photo-upload {
+  text-align: center;
+  font-size: 38px;
+}

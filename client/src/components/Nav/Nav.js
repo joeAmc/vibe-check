@@ -9,7 +9,7 @@ const Nav = ({ venuesType, newVibetype, formatedType, signup }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [show, setShow] = useState(true);
-  const loggedIn = true;
+  // const loggedIn = true;
 
   useEffect(() => {
     let previousScrollPosition = 0;
@@ -72,7 +72,8 @@ const Nav = ({ venuesType, newVibetype, formatedType, signup }) => {
       {navText()}
       <div className="icons">
         <BiHomeAlt onClick={homeIconHandler} />
-        {!loggedIn && <CgProfile onClick={homeIconHandler} />}
+        {/* {!loggedIn && <CgProfile onClick={homeIconHandler} />} */}
+        <CgProfile onClick={homeIconHandler} />
       </div>
     </div>
   );

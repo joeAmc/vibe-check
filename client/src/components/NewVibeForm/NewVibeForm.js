@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import "./NewVibeForm.css";
 import { storage } from "../../firebase";
@@ -7,6 +7,10 @@ import { v4 } from "uuid";
 import NewVibeAlert from "../NewVibeAlert/NewVibeAlert";
 import Nav from "../Nav/Nav";
 import { Bars } from "react-loader-spinner";
+import { Camera } from "react-html5-camera-photo";
+import "react-html5-camera-photo/build/css/index.css";
+import ImagePreview from "./ImagePreview";
+import { MdOutlineAddAPhoto } from "react-icons/md";
 
 const NewVibeForm = () => {
   const { type } = useParams();
@@ -19,6 +23,10 @@ const NewVibeForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertClass, setAlertClass] = useState("x");
+  // const [dataUri, setDataUri] = useState("");
+  const [uri, setUri] = useState(null);
+  const [cameraOn, setCameraOn] = useState(false);
+  // const isFullscreen = false;
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -31,9 +39,22 @@ const NewVibeForm = () => {
   const handleVibesChange = () => {
     setVibes("1");
   };
+  const handleCamera = () => {
+    setCameraOn(true);
+  };
 
-  const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
+  // const handleImageChange = (event) => {
+  //   setImage(event.target.files[0]);
+  // };
+
+  const handleTakePhoto = (dataUri) => {
+    console.log(dataUri);
+    fetch(dataUri)
+      .then((res) => res.blob())
+      .then((blob) => {
+        setImage(blob);
+        setUri(dataUri);
+      });
   };
 
   const handleSubmit = async (event) => {
@@ -137,8 +158,19 @@ const NewVibeForm = () => {
           />
         </label>
         <label>
-          Add Photo
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+          {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
+          <div className="photo-upload">
+            {!cameraOn ? (
+              <MdOutlineAddAPhoto onClick={handleCamera} />
+            ) : uri ? (
+              <ImagePreview uri={uri} />
+            ) : (
+              <Camera
+                // isFullscreen={true}
+                onTakePhoto={(dataUri) => handleTakePhoto(dataUri)}
+              />
+            )}
+          </div>
         </label>
         <br />
         <button type="submit">Check Vibe In</button>

@@ -25,7 +25,8 @@ const VibeChoice = () => {
 
   const handleSelect = (type) => {
     const formatedType = type.replaceAll(" ", "_");
-    navigate(loggedIn ? `/venues/${formatedType}` : `/auth`);
+    // navigate(loggedIn ? `/venues/${formatedType}` : `/auth`);
+    navigate(`/venues/${formatedType}`);
   };
 
   const handleSlideChange = (swiper) => {
