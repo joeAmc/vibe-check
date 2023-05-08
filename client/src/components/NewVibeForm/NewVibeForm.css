@@ -67,3 +67,8 @@ input {
 #file-upload-button {
   background-color: var(--light-alt);
 }
+
+video {
+  border-radius: var(--border-radius);
+  margin-top: 22px;
+}

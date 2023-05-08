@@ -26,6 +26,7 @@ const NewVibeForm = () => {
   // const [dataUri, setDataUri] = useState("");
   const [uri, setUri] = useState(null);
   const [cameraOn, setCameraOn] = useState(false);
+  const [closePreview, setClosePreview] = useState(false);
   // const isFullscreen = false;
 
   const handleNameChange = (event) => {
@@ -57,6 +58,13 @@ const NewVibeForm = () => {
       });
   };
 
+  const handleClosePreview = () => {
+    setClosePreview(true);
+    setUri(null);
+  };
+
+  console.log({ closePreview });
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -74,8 +82,6 @@ const NewVibeForm = () => {
         vibes: vibes,
         image: imageUrl,
       };
-
-      console.log({ newVenueData });
 
       try {
         const response = await fetch("http://localhost:3002/venue/new", {
@@ -158,17 +164,13 @@ const NewVibeForm = () => {
           />
         </label>
         <label>
-          {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
           <div className="photo-upload">
             {!cameraOn ? (
               <MdOutlineAddAPhoto onClick={handleCamera} />
             ) : uri ? (
-              <ImagePreview uri={uri} />
+              <ImagePreview uri={uri} closePreview={handleClosePreview} />
             ) : (
-              <Camera
-                // isFullscreen={true}
-                onTakePhoto={(dataUri) => handleTakePhoto(dataUri)}
-              />
+              <Camera onTakePhoto={(dataUri) => handleTakePhoto(dataUri)} />
             )}
           </div>
         </label>

@@ -21,7 +21,7 @@
   padding: 12px;
   padding-top: 36px;
   border-radius: var(--border-radius);
-  box-shadow: 0 0 30px 2px #cd587f;
+  /* box-shadow: 0 0 30px 2px #cd587f; */
   background-image: linear-gradient(
     to bottom,
     var(--primary),
