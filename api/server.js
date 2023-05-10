@@ -47,6 +47,24 @@ app.post("/venue/new", async (req, res) => {
   }
 });
 
+app.post("/venue/new", async (req, res) => {
+  const venue = new Venue({
+    type: req.body.type,
+    name: req.body.name,
+    location: req.body.location,
+    image: req.body.image,
+  });
+
+  try {
+    await venue.save();
+    res.status(201).json(venue);
+    console.log("venue successfully sent");
+  } catch (error) {
+    console.error(`Failed to create venue: ${error}`);
+    res.status(500).json({ message: "Failed to create venue" });
+  }
+});
+
 app.delete("/venue/delete/:id", async (req, res) => {
   const result = await Venue.findByIdAndDelete(req.params.id);
 
@@ -62,12 +80,19 @@ app.delete("/venue/deleteall", async (req, res) => {
 });
 
 app.put("/venue/:id", async (req, res) => {
-  const venue = await Venue.findById(req.params.id);
-
-  venue.vibe++;
-
-  venue.save();
-  res.json(venue);
+  try {
+    const venue = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        vibes: req.body.type,
+      },
+      { new: true }
+    );
+    res.json(venue);
+  } catch (error) {
+    console.error(`Failed to veri-vibe: ${venue}`);
+    res.status(500).json({ message: "Failed to veri-vibe" });
+  }
 });
 
 // users

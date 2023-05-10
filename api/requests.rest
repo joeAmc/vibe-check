@@ -19,7 +19,7 @@ DELETE http://localhost:3002/venue/delete/64483b0a84364d59184beb66
 DELETE http://localhost:3002/venue/deleteall
 ###
 
-PUT http://localhost:3002/vibe/64307eddd35eef75d558d464
+PUT http://localhost:3002/venue/645c065f51b43632842bfb37
 
 ###
 
