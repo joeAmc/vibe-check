@@ -79,19 +79,29 @@ app.delete("/venue/deleteall", async (req, res) => {
   res.json(result);
 });
 
-app.put("/venue/:id", async (req, res) => {
+app.put("/venue/vibes/:id", async (req, res) => {
   try {
-    const venue = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        vibes: req.body.type,
-      },
+    const { id } = req.params;
+    const { vibes } = req.body;
+
+    if (!id || !vibes) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const updatedVenue = await Venue.findByIdAndUpdate(
+      id,
+      { vibes },
       { new: true }
     );
-    res.json(venue);
+
+    if (!updatedVenue) {
+      return res.status(404).json({ message: "Venue not found" });
+    }
+
+    return res.json(updatedVenue);
   } catch (error) {
-    console.error(`Failed to veri-vibe: ${venue}`);
-    res.status(500).json({ message: "Failed to veri-vibe" });
+    console.error(`Failed to update venue vibes: ${error}`);
+    return res.status(500).json({ message: "Failed to update venue vibes" });
   }
 });
 

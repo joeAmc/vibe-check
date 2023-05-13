@@ -36,7 +36,7 @@ const Venues = () => {
     setVenues((prevVenues) =>
       prevVenues.map((v) => (v._id === venue._id ? updatedVenue : v))
     );
-    fetch(`http://localhost:3002/venue/${venue._id}`, {
+    fetch(`http://localhost:3002/venue/vibes/${venue._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -48,6 +48,7 @@ const Venues = () => {
       .catch((err) => console.log("Error: ", err));
   };
 
+  console.log("venues: ", venues);
   return (
     <div>
       <Nav venuesType={type} formatedType={removeUnderScoreFromType} />
