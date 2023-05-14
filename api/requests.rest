@@ -32,12 +32,23 @@ GET  http://localhost:3002/users
 
 ###
 
-POST http://localhost:3002/user/new
+POST http://localhost:3002/signup
 Content-Type: application/json
 
 {
   "username": "SilkyBoy",
-  "email": "joe+1@gmail.com"
+  "email": "joe+1@gmail.com",
+  "password": "12345"
+}
+
+###
+
+POST http://localhost:3002/login
+Content-Type: application/json
+
+{
+  "email": "joe+1@gmail.com",
+  "password": "12345"
 }
 
 ###
@@ -52,3 +63,7 @@ Content-Type: application/json
 {
   "type": "Club Night"
 }
+
+###
+
+DELETE http://localhost:3002/users/deleteall

@@ -107,27 +107,38 @@ app.put("/venue/vibes/:id", async (req, res) => {
 
 // users
 
+app.post("/signup", async (req, res) => {
+  const { username, email, password } = req.body;
+  const user = new User({ username, email, password });
+  try {
+    await user.save();
+    res.status(201).json(user);
+    console.log("user successfully signed up");
+  } catch (error) {
+    console.error(`Failed to sign up user: ${error}`);
+    res.status(500).json({ message: "Failed to sign up user" });
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user || user.password !== password) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+    res.json(user);
+    console.log("user successfully logged in");
+  } catch (error) {
+    console.error(`Failed to log in user: ${error}`);
+    res.status(500).json({ message: "Failed to log in user" });
+  }
+});
+
 app.get("/users", async (req, res) => {
   const users = await User.find();
 
   res.json(users);
-});
-
-app.post("/user/new", async (req, res) => {
-  const user = new User({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  });
-
-  try {
-    await user.save();
-    console.log("user successfully saved");
-    res.status(201).redirect("http://localhost:3000");
-  } catch (error) {
-    console.error(`Failed to create user: ${error}`);
-    res.status(500).json({ message: "Failed to create user" });
-  }
 });
 
 app.delete("/user/delete/:id", async (req, res) => {
@@ -136,21 +147,27 @@ app.delete("/user/delete/:id", async (req, res) => {
   res.json(result);
 });
 
-app.put("/user/:id", async (req, res) => {
-  try {
-    const user = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        type: req.body.type,
-      },
-      { new: true }
-    );
-    res.json(user);
-  } catch (error) {
-    console.error(`Failed to update user: ${error}`);
-    res.status(500).json({ message: "Failed to update user" });
-  }
+app.delete("/users/deleteall", async (req, res) => {
+  const result = await User.deleteMany();
+
+  res.json(result);
 });
+
+// app.put("/user/:id", async (req, res) => {
+//   try {
+//     const user = await User.findByIdAndUpdate(
+//       req.params.id,
+//       {
+//         type: req.body.type,
+//       },
+//       { new: true }
+//     );
+//     res.json(user);
+//   } catch (error) {
+//     console.error(`Failed to update user: ${error}`);
+//     res.status(500).json({ message: "Failed to update user" });
+//   }
+// });
 
 app.listen(3002, () => {
   console.log("Server started on port 3002");

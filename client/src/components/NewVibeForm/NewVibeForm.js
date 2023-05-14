@@ -4,7 +4,7 @@ import "./NewVibeForm.css";
 import { storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-import NewVibeAlert from "../NewVibeAlert/NewVibeAlert";
+import Alert from "../NewVIbeAlert/NewVibeAlert";
 import Nav from "../Nav/Nav";
 import { Bars } from "react-loader-spinner";
 import { Camera } from "react-html5-camera-photo";
@@ -116,11 +116,7 @@ const NewVibeForm = () => {
       <Nav newVibetype={type} />
       <div className="spacer" />
       {showAlert && (
-        <NewVibeAlert
-          text={alertMessage}
-          backgroundColor={alertClass}
-          type={type}
-        />
+        <Alert text={alertMessage} backgroundColor={alertClass} type={type} />
       )}
       {loading && (
         <>
