@@ -153,22 +153,6 @@ app.delete("/users/deleteall", async (req, res) => {
   res.json(result);
 });
 
-// app.put("/user/:id", async (req, res) => {
-//   try {
-//     const user = await User.findByIdAndUpdate(
-//       req.params.id,
-//       {
-//         type: req.body.type,
-//       },
-//       { new: true }
-//     );
-//     res.json(user);
-//   } catch (error) {
-//     console.error(`Failed to update user: ${error}`);
-//     res.status(500).json({ message: "Failed to update user" });
-//   }
-// });
-
 app.listen(3002, () => {
   console.log("Server started on port 3002");
 });

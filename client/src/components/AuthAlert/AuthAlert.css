@@ -1,12 +1,12 @@
 .alert {
   color: rgb(39, 37, 37);
   margin-top: 32px;
-  padding: 32px;
+  padding: 18px;
   margin-bottom: 32px;
   border-radius: var(--border-radius);
   cursor: pointer;
   position: absolute;
-  width: 100%;
+  width: 85vw;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
