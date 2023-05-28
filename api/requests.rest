@@ -8,7 +8,9 @@ Content-Type: application/json
 {
   "type": "Cosy Pub",
   "name": "The Royal Oak",
-  "location": "London"
+  "location": "London",
+  "image": "http://www.royaloaklondon.co.uk/wp-content/uploads/2014/10/royal-oak-1.jpg",
+
 }
 
 ###
