@@ -21,7 +21,7 @@
 .alert.success {
   background-color: #67e667;
   background-image: linear-gradient(to bottom, #67e667, #64bf8d);
-  width: 80%;
+  width: 85vw;
 }
 
 .alert.fail {

@@ -9,6 +9,8 @@ const Venues = () => {
   const { type } = useParams();
   const [venues, setVenues] = useState([]);
   const [veriVibed, setVeriVibed] = useState(false);
+  const [selectedVenue, setSelectedVenue] = useState(null);
+
   const removeUnderScoreFromType = type.replaceAll("_", " ");
 
   useEffect(() => {
@@ -29,9 +31,25 @@ const Venues = () => {
 
   const handleVibeClicked = (venue) => {
     const updatedVenue = { ...venue };
-    veriVibed ? updatedVenue.vibes-- : updatedVenue.vibes++;
-    setVeriVibed(!veriVibed);
-    console.log(updatedVenue);
+    let updatedVibes = updatedVenue.vibes;
+
+    // Update the vibes count based on the veriVibed state
+    if (veriVibed && selectedVenue && selectedVenue._id === venue._id) {
+      updatedVibes -= 1;
+    } else {
+      updatedVibes += 1;
+    }
+
+    setSelectedVenue(venue);
+    setVeriVibed((prevVeriVibed) => {
+      // Toggle the veriVibed state only for the selected venue
+      if (selectedVenue && selectedVenue._id === venue._id) {
+        return !prevVeriVibed;
+      }
+      return true; // Set it to true for the initially clicked venue
+    });
+
+    updatedVenue.vibes = updatedVibes;
 
     setVenues((prevVenues) =>
       prevVenues.map((v) => (v._id === venue._id ? updatedVenue : v))
@@ -48,7 +66,6 @@ const Venues = () => {
       .catch((err) => console.log("Error: ", err));
   };
 
-  console.log("venues: ", venues);
   return (
     <div>
       <Nav venuesType={type} formatedType={removeUnderScoreFromType} />
@@ -72,7 +89,9 @@ const Venues = () => {
                 <div className="vibe-votes">
                   <div
                     onClick={() => handleVibeClicked(venue)}
-                    className={`vibe-icon ${veriVibed && "selected"}`}
+                    className={`vibe-icon ${
+                      veriVibed && selectedVenue._id === venue._id && "selected"
+                    }`}
                   ></div>
                   <h5>{venue.vibes}</h5>
                 </div>
