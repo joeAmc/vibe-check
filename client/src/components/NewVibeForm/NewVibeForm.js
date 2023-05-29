@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./NewVibeForm.css";
 import { storage } from "../../firebase";
@@ -17,17 +17,35 @@ const NewVibeForm = () => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [loading, setLoading] = useState(false);
-  // need to look at how to set the vibe better!
   const [vibes, setVibes] = useState("0");
   const [image, setImage] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertClass, setAlertClass] = useState("x");
-  // const [dataUri, setDataUri] = useState("");
   const [uri, setUri] = useState(null);
   const [cameraOn, setCameraOn] = useState(false);
   const [closePreview, setClosePreview] = useState(false);
-  // const isFullscreen = false;
+  const [facingMode, setFacingMode] = useState("user");
+
+  useEffect(() => {
+    const checkRearCamera = async () => {
+      try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const rearCamera = devices.find(
+          (device) =>
+            device.kind === "videoinput" &&
+            device.label.toLowerCase().includes("back")
+        );
+        if (rearCamera) {
+          setFacingMode("environment");
+        }
+      } catch (error) {
+        console.error("Failed to enumerate media devices:", error);
+      }
+    };
+
+    checkRearCamera();
+  }, []);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -166,7 +184,10 @@ const NewVibeForm = () => {
             ) : uri ? (
               <ImagePreview uri={uri} closePreview={handleClosePreview} />
             ) : (
-              <Camera onTakePhoto={(dataUri) => handleTakePhoto(dataUri)} />
+              <Camera
+                onTakePhoto={(dataUri) => handleTakePhoto(dataUri)}
+                idealFacingMode={facingMode}
+              />
             )}
           </div>
         </label>
