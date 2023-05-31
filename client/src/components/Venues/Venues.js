@@ -18,9 +18,10 @@ const Venues = () => {
   }, []);
 
   const getVenues = () => {
-    fetch("http://localhost:3002/venues")
+    fetch("/venues")
       .then((res) => res.json())
       .then((data) => {
+        console.log("data", data);
         const filteredVenues = data.filter(
           (venue) => venue.type === type && venue.vibes >= 0
         );
@@ -60,7 +61,7 @@ const Venues = () => {
     setVenues((prevVenues) =>
       prevVenues.map((v) => (v._id === venue._id ? updatedVenue : v))
     );
-    fetch(`http://localhost:3002/venue/vibes/${venue._id}`, {
+    fetch(`/venue/vibes/${venue._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

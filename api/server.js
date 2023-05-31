@@ -9,10 +9,14 @@ app.use(express.json());
 app.use(cors());
 
 mongoose
-  .connect("mongodb://localhost:27017/vibe-check", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  // .connect("mongodb://localhost:27017/vibe-check", {
+  .connect(
+    "mongodb+srv://joeamcilroy:cvsfJCh89ZZ2qhrw@venues.3omj6h6.mongodb.net/?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("Connected to database");
   })
@@ -194,6 +198,6 @@ app.delete("/users/deleteall", async (req, res) => {
   res.json(result);
 });
 
-app.listen(3002, () => {
-  console.log("Server started on port 3002");
+app.listen(3000, () => {
+  console.log("Server started on port 3000");
 });

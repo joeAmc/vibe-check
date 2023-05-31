@@ -84,7 +84,7 @@ const Auth = () => {
 
     if (signUp) {
       try {
-        const response = await fetch("http://localhost:3002/signup", {
+        const response = await fetch("/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -114,7 +114,7 @@ const Auth = () => {
     }
     if (!signUp) {
       try {
-        const response = await fetch("http://localhost:3002/login", {
+        const response = await fetch("/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -81,8 +81,6 @@ const NewVibeForm = () => {
     setUri(null);
   };
 
-  console.log({ closePreview });
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -102,7 +100,7 @@ const NewVibeForm = () => {
       };
 
       try {
-        const response = await fetch("http://localhost:3002/venue/new", {
+        const response = await fetch("/venue/new", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
