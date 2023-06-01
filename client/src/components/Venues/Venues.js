@@ -18,10 +18,10 @@ const Venues = () => {
   }, []);
 
   const getVenues = () => {
+    console.log("Response from getVenues:"); // Log the response data
     fetch("/venues")
       .then((res) => res.json())
       .then((data) => {
-        console.log("data", data);
         const filteredVenues = data.filter(
           (venue) => venue.type === type && venue.vibes >= 0
         );
