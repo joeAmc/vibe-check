@@ -27,7 +27,6 @@ const User = require("./models/User");
 
 app.get("/venues", async (req, res) => {
   const venues = await Venue.find();
-  console.log(res.json(venues));
   res.json(venues);
 });
 

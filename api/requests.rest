@@ -20,7 +20,7 @@ DELETE http://localhost:3002/venue/delete/64483b0a84364d59184beb66
 DELETE http://localhost:3002/venue/deleteall
 ###
 
-PUT http://localhost:3002/venue/vibes/645f495db2f5d09e4e3a0981
+PUT http://localhost:3002/venue/vibes/647915141d8c2f09ee63f074
 Content-Type: application/json
 
 {
