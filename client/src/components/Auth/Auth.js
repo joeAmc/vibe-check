@@ -93,6 +93,7 @@ const Auth = () => {
         });
         if (response.ok) {
           console.log("New user added successfully!");
+          console.log("newUserData", newUserData);
           setAlertMessage("Welcome to Vibe Check!");
           setAlertClass("success");
           setSuccess(true);
