@@ -1,23 +1,35 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const mongoURI = require("../config");
+require("dotenv").config();
 
 const app = express();
-const uri = mongoURI;
+
 app.use(express.json());
 app.use(cors());
 
+// mongoose
+//   .connect(uri, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("Connected to database");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+// connect MongoDB
 mongoose
-  .connect(uri, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Connected to database");
+    console.log(`Connected to database`);
   })
   .catch((err) => {
-    console.log(err);
+    console.log("ERROR!!!", err);
   });
 
 // venues
@@ -27,24 +39,6 @@ const User = require("./models/User");
 app.get("/venues", async (req, res) => {
   const venues = await Venue.find();
   res.json(venues);
-});
-
-app.post("/venue/new", async (req, res) => {
-  const venue = new Venue({
-    type: req.body.type,
-    name: req.body.name,
-    location: req.body.location,
-    image: req.body.image,
-  });
-
-  try {
-    await venue.save();
-    res.status(201).json(venue);
-    console.log("venue successfully sent");
-  } catch (error) {
-    console.error(`Failed to create venue: ${error}`);
-    res.status(500).json({ message: "Failed to create venue" });
-  }
 });
 
 app.post("/venue/new", async (req, res) => {
@@ -152,6 +146,7 @@ app.delete("/users/deleteall", async (req, res) => {
   res.json(result);
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server started");
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`App is Listening on PORT ${PORT}`);
 });
