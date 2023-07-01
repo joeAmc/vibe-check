@@ -100,7 +100,7 @@ const NewVibeForm = () => {
       };
 
       try {
-        const response = await fetch("http://localhost:3000/venue/new", {
+        const response = await fetch("/venue/new", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
