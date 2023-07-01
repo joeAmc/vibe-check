@@ -9,7 +9,6 @@ app.use(express.json());
 app.use(cors());
 
 mongoose
-  // .connect("mongodb://localhost:27017/vibe-check", {
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -80,46 +79,6 @@ app.delete("/venue/deleteall", async (req, res) => {
   res.json(result);
 });
 
-// app.delete("/venue/delete/:id", async (req, res) => {
-//   const venue = await Venue.findByIdAndDelete(req.params.id);
-
-//   if (!venue) {
-//     return res.status(404).json({ message: "Venue not found" });
-//   }
-
-//   // Delete the image from Firebase storage
-//   const imageRef = storage.refFromURL(venue.image);
-//   try {
-//     await imageRef.delete();
-//   } catch (error) {
-//     console.error(`Failed to delete image from Firebase storage: ${error}`);
-//   }
-
-//   res.json({ message: "Venue deleted" });
-// });
-
-// app.delete("/venue/deleteall", async (req, res) => {
-//   const venues = await Venue.find({
-//     type: "Cosy_Pub",
-//   });
-
-//   // Delete the images from Firebase storage
-//   for (const venue of venues) {
-//     const imageRef = storage.refFromURL(venue.image);
-//     try {
-//       await imageRef.delete();
-//     } catch (error) {
-//       console.error(`Failed to delete image from Firebase storage: ${error}`);
-//     }
-//   }
-
-//   const result = await Venue.deleteMany({
-//     type: "Cosy_Pub",
-//   });
-
-//   res.json(result);
-// });
-
 app.put("/venue/vibes/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -147,7 +106,6 @@ app.put("/venue/vibes/:id", async (req, res) => {
 });
 
 // users
-
 app.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
   const user = new User({ username, email, password });
@@ -194,6 +152,6 @@ app.delete("/users/deleteall", async (req, res) => {
   res.json(result);
 });
 
-app.listen(3002, () => {
-  console.log("Server started on port 3002");
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Server started");
 });
