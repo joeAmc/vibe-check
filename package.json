@@ -7,7 +7,8 @@
     "install-server": "cd api && npm install",
     "start-server": "cd api && node server.js",
     "install-client": "cd client && npm install",
-    "build-client": "cd client && npm run build"
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run start"
   },
   "repository": {
     "type": "git",
