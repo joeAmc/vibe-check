@@ -2,7 +2,8 @@ GET http://localhost:3002/venues
 
 ###
 
-POST /venue/new
+POST https://vibe-check-dsol.onrender.com/venue/new
+# POST /venue/new
 Content-Type: application/json
 
 {
