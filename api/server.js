@@ -5,21 +5,12 @@ require("dotenv").config();
 
 const app = express();
 
+const corsOptions = {
+  origin: "https://vibe-check-773b3.web.app",
+};
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
-// mongoose
-//   .connect(uri, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     console.log("Connected to database");
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-// connect MongoDB
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
