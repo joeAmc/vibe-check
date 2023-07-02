@@ -18,7 +18,7 @@ const Venues = () => {
   }, []);
 
   const getVenues = () => {
-    fetch("https://vibe-check-dsol.onrender.com/venues")
+    fetch("https://vibe-check-backend-opz0.onrender.com/venues")
       .then((res) => res.json())
       .then((data) => {
         const filteredVenues = data.filter(

@@ -102,7 +102,7 @@ const NewVibeForm = () => {
       try {
         // const response = await fetch("http://localhost:4000/venue/new", {
         const response = await fetch(
-          "https://vibe-check-dsol.onrender.com/venue/new",
+          "https://vibe-check-backend-opz0.onrender.com",
           {
             method: "POST",
             headers: {

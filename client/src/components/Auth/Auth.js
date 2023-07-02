@@ -85,7 +85,7 @@ const Auth = () => {
     if (signUp) {
       try {
         const response = await fetch(
-          "https://vibe-check-dsol.onrender.com/signup",
+          "https://vibe-check-backend-opz0.onrender.com/signup",
           {
             method: "POST",
             headers: {
@@ -119,7 +119,7 @@ const Auth = () => {
     if (!signUp) {
       try {
         const response = await fetch(
-          "https://vibe-check-dsol.onrender.com/login",
+          "https://vibe-check-backend-opz0.onrender.com/login",
           {
             method: "POST",
             headers: {
