@@ -100,13 +100,17 @@ const NewVibeForm = () => {
       };
 
       try {
-        const response = await fetch("http://localhost:4000/venue/new", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newVenueData),
-        });
+        // const response = await fetch("http://localhost:4000/venue/new", {
+        const response = await fetch(
+          "https://vibe-check-dsol.onrender.com/venue/new",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newVenueData),
+          }
+        );
 
         if (response.ok) {
           console.log("New Vibe added successfully!");

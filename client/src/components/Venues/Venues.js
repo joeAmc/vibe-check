@@ -18,7 +18,7 @@ const Venues = () => {
   }, []);
 
   const getVenues = () => {
-    fetch("/venues")
+    fetch("https://vibe-check-dsol.onrender.com/venues")
       .then((res) => res.json())
       .then((data) => {
         const filteredVenues = data.filter(
@@ -60,7 +60,7 @@ const Venues = () => {
     setVenues((prevVenues) =>
       prevVenues.map((v) => (v._id === venue._id ? updatedVenue : v))
     );
-    fetch(`/venue/vibes/${venue._id}`, {
+    fetch(`https://vibe-check-dsol.onrender.com/venue/vibes/${venue._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

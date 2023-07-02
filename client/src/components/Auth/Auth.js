@@ -84,13 +84,16 @@ const Auth = () => {
 
     if (signUp) {
       try {
-        const response = await fetch("/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newUserData),
-        });
+        const response = await fetch(
+          "https://vibe-check-dsol.onrender.com/signup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUserData),
+          }
+        );
         if (response.ok) {
           console.log("New user added successfully!");
           console.log("newUserData", newUserData);
@@ -115,13 +118,16 @@ const Auth = () => {
     }
     if (!signUp) {
       try {
-        const response = await fetch("/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
+        const response = await fetch(
+          "https://vibe-check-dsol.onrender.com/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          }
+        );
         if (response.ok) {
           console.log("Logged in successfully!");
           setLoggedIn(true);
