@@ -5,7 +5,7 @@ import { storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 // import Alert from "../NewVIbeAlert/NewVibeAlert";
-import Alert from "../../components/NewVIbeAlert/NewVibeAlert";
+import Alert from "../AuthAlert/AuthAlert";
 import Nav from "../Nav/Nav";
 import { Bars } from "react-loader-spinner";
 import { Camera } from "react-html5-camera-photo";
