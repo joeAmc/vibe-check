@@ -29,6 +29,8 @@ const NewVibeForm = () => {
 
   const API_URL = process.env.API_BASE_URL || "http://localhost:4000";
 
+  console.log(API_URL);
+
   useEffect(() => {
     const checkRearCamera = async () => {
       try {
@@ -103,13 +105,16 @@ const NewVibeForm = () => {
 
       try {
         // const response = await fetch("http://localhost:4000/venue/new", {
-        const response = await fetch(`${API_URL}/venue/new`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newVenueData),
-        });
+        const response = await fetch(
+          "https://vibe-check-backend-opz0.onrender.com/venue/new",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newVenueData),
+          }
+        );
 
         if (response.ok) {
           console.log("New Vibe added successfully!");
