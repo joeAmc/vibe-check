@@ -5,12 +5,13 @@ require("dotenv").config();
 
 const app = express();
 
-const corsOptions = {
-  origin: ["https://vibe-check-773b3.web.app", "http://localhost:4000"],
-};
+// const corsOptions = {
+//   origin: ["https://vibe-check-773b3.web.app", "http://localhost:4000"],
+// };
 
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
+// app.use(cors(corsOptions));
 
 mongoose
   .connect(process.env.MONGODB_URI, {

@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./Venues.css";
 import NewVIbeButton from "../NewVIbeButton/NewVIbeButton";
 import Nav from "../Nav/Nav";
+import { AuthContext } from "../../AuthContext";
+import Alert from "../AuthAlert/AuthAlert";
 
 const Venues = () => {
   const { type } = useParams();
   const [venues, setVenues] = useState(null);
   const [veriVibed, setVeriVibed] = useState(false);
   const [selectedVenue, setSelectedVenue] = useState(null);
-  const [hasVenuesOfType, setHasVenuesOfType] = useState(false); // New state variable
+  const [hasVenuesOfType, setHasVenuesOfType] = useState(false);
+  const { loggedIn } = useContext(AuthContext);
+  const API_URL = process.env.REACT_APP_API;
 
   const removeUnderScoreFromType = type.replaceAll("_", " ");
 
@@ -18,7 +22,7 @@ const Venues = () => {
   }, []);
 
   const getVenues = () => {
-    fetch("https://vibe-check-backend-opz0.onrender.com/venues")
+    fetch(`${API_URL}/venues`)
       .then((res) => res.json())
       .then((data) => {
         const filteredVenues = data.filter(
@@ -39,7 +43,6 @@ const Venues = () => {
     const updatedVenue = { ...venue };
     let updatedVibes = updatedVenue.vibes;
 
-    // Update the vibes count based on the veriVibed state
     if (veriVibed && selectedVenue && selectedVenue._id === venue._id) {
       updatedVibes -= 1;
     } else {
@@ -48,7 +51,6 @@ const Venues = () => {
 
     setSelectedVenue(venue);
     setVeriVibed((prevVeriVibed) => {
-      // Toggle the veriVibed state only for the selected venue
       if (selectedVenue && selectedVenue._id === venue._id) {
         return !prevVeriVibed;
       }
@@ -60,7 +62,7 @@ const Venues = () => {
     setVenues((prevVenues) =>
       prevVenues.map((v) => (v._id === venue._id ? updatedVenue : v))
     );
-    fetch(`https://vibe-check-dsol.onrender.com/venue/vibes/${venue._id}`, {
+    fetch(`${API_URL}/venue/vibes/${venue._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -72,12 +74,11 @@ const Venues = () => {
       .catch((err) => console.log("Error: ", err));
   };
 
-  console.log("venues", venues);
-
   return (
     <div>
       <Nav venuesType={type} formatedType={removeUnderScoreFromType} />
       <div className="spacer" />
+      {!loggedIn && <Alert />}
       <div className="venues">
         {hasVenuesOfType && venues.length > 0 ? (
           venues

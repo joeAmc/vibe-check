@@ -2,28 +2,19 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./AuthAlert.css";
 import { RxCrossCircled } from "react-icons/rx";
-import { AuthContext } from "../../AuthContext";
-import { useContext } from "react";
 
-const AuthAlert = ({ text, backgroundColor }) => {
+const AuthAlert = () => {
   const navigate = useNavigate();
-  const { showAlert, setShowAlert, loggedIn } = useContext(AuthContext);
 
-  console.log("loggedIn: ", loggedIn);
   const closeAlertHandler = () => {
-    navigate(loggedIn ? `/vibes` : "/");
-    setShowAlert(false);
+    navigate("/");
   };
-
-  if (!showAlert) {
-    return null;
-  }
 
   return (
     <>
-      <div className={`alert ${backgroundColor}`}>
+      <div className={`alert fail`}>
         <div className="alert-info">
-          <p>{text}</p>
+          <p>Log in or Sign up!</p>
           <div className="close-alert" onClick={closeAlertHandler}>
             <RxCrossCircled />
           </div>

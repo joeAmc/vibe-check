@@ -5,7 +5,6 @@ import { RxCrossCircled } from "react-icons/rx";
 
 const NewVibeAlert = ({ text, backgroundColor, type }) => {
   const navigate = useNavigate();
-  console.log(type);
 
   const closeAlertHandler = () => {
     navigate(`/venues/${type}`);

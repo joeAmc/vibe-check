@@ -27,9 +27,7 @@ const NewVibeForm = () => {
   const [closePreview, setClosePreview] = useState(false);
   const [facingMode, setFacingMode] = useState("user");
 
-  const API_URL = process.env.API_BASE_URL || "http://localhost:4000";
-
-  console.log(API_URL);
+  const API_URL = process.env.REACT_APP_API;
 
   useEffect(() => {
     const checkRearCamera = async () => {
@@ -59,16 +57,9 @@ const NewVibeForm = () => {
     setLocation(event.target.value);
   };
 
-  const handleVibesChange = () => {
-    setVibes("1");
-  };
   const handleCamera = () => {
     setCameraOn(true);
   };
-
-  // const handleImageChange = (event) => {
-  //   setImage(event.target.files[0]);
-  // };
 
   const handleTakePhoto = (dataUri) => {
     console.log(dataUri);
@@ -104,17 +95,13 @@ const NewVibeForm = () => {
       };
 
       try {
-        // const response = await fetch("http://localhost:4000/venue/new", {
-        const response = await fetch(
-          "https://vibe-check-backend-opz0.onrender.com/venue/new",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newVenueData),
-          }
-        );
+        const response = await fetch(`${API_URL}/venue/new`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newVenueData),
+        });
 
         if (response.ok) {
           console.log("New Vibe added successfully!");

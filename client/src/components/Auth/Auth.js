@@ -20,6 +20,8 @@ const Auth = () => {
   const [success, setSuccess] = useState();
   const { setLoggedIn, showAlert, setShowAlert } = useContext(AuthContext);
 
+  const API_URL = process.env.REACT_APP_API;
+
   const handleUserNameChange = (event) => {
     setUserName(event.target.value);
   };
@@ -37,7 +39,6 @@ const Auth = () => {
     setLoading(true);
     console.log("submitting");
 
-    // Check if username and password meet validation criteria
     if (password.length < 8) {
       setAlertMessage("Password must be at least 8 characters long");
       setAlertClass("fail");
@@ -84,16 +85,13 @@ const Auth = () => {
 
     if (signUp) {
       try {
-        const response = await fetch(
-          "https://vibe-check-backend-opz0.onrender.com/signup",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newUserData),
-          }
-        );
+        const response = await fetch(`${API_URL}/signup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUserData),
+        });
         if (response.ok) {
           console.log("New user added successfully!");
           console.log("newUserData", newUserData);
@@ -118,16 +116,13 @@ const Auth = () => {
     }
     if (!signUp) {
       try {
-        const response = await fetch(
-          "https://vibe-check-backend-opz0.onrender.com/login",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-          }
-        );
+        const response = await fetch(`${API_URL}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
         if (response.ok) {
           console.log("Logged in successfully!");
           setLoggedIn(true);
