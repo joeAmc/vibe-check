@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./AuthAlert.css";
 import { RxCrossCircled } from "react-icons/rx";
 
-const AuthAlert = () => {
+const AuthAlert = ({ text }) => {
   const navigate = useNavigate();
 
   const closeAlertHandler = () => {
@@ -14,7 +14,8 @@ const AuthAlert = () => {
     <>
       <div className={`alert fail`}>
         <div className="alert-info">
-          <p>Log in or Sign up!</p>
+          <p>{text}</p>
+          {/* <p>Log in or Sign up!</p> */}
           <div className="close-alert" onClick={closeAlertHandler}>
             <RxCrossCircled />
           </div>

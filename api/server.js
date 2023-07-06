@@ -8,10 +8,10 @@ const app = express();
 // const corsOptions = {
 //   origin: ["https://vibe-check-773b3.web.app", "http://localhost:4000"],
 // };
+// app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(cors());
-// app.use(cors(corsOptions));
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -118,6 +118,25 @@ app.post("/login", async (req, res) => {
   } catch (error) {
     console.error(`Failed to log in user: ${error}`);
     res.status(500).json({ message: "Failed to log in user" });
+  }
+});
+
+app.post("/check-user", async (req, res) => {
+  const { username, email } = req.body;
+
+  try {
+    const existingUser = await User.findOne({
+      $or: [{ username }, { email }],
+    });
+
+    if (existingUser) {
+      return res.json({ exists: true });
+    }
+
+    res.json({ exists: false });
+  } catch (error) {
+    console.error(`Failed to check user: ${error}`);
+    res.status(500).json({ message: "Failed to check user" });
   }
 });
 

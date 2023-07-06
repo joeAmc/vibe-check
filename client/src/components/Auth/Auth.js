@@ -55,33 +55,33 @@ const Auth = () => {
     };
 
     // Check if username or email already exist in the database
-    // try {
-    //   const response = await fetch("http://localhost:3002/check-user", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ username, email }),
-    //   });
-    //   const data = await response.json();
-    //   if (data.exists) {
-    //     console.error("Username or email already exist in database");
-    //     setAlertMessage("Username or email already exist in database");
-    //     setAlertClass("fail");
-    //     setSuccess(false);
-    //     setShowAlert(true);
-    //     setLoading(false);
-    //     return;
-    //   }
-    // } catch (error) {
-    //   console.error(`Failed to check user : ${error}`);
-    //   setAlertMessage(`Failed to check user : ${error}`);
-    //   setAlertClass("fail");
-    //   setSuccess(false);
-    //   setShowAlert(true);
-    //   setLoading(false);
-    //   return;
-    // }
+    try {
+      const response = await fetch(`${API_URL}/check-user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email }),
+      });
+      const data = await response.json();
+      if (data.exists) {
+        console.error("Username or email already exists");
+        setAlertMessage("Username or email already exists");
+        setAlertClass("fail");
+        setSuccess(false);
+        setShowAlert(true);
+        setLoading(false);
+        return;
+      }
+    } catch (error) {
+      console.error(`Failed to check user : ${error}`);
+      setAlertMessage(`Failed to check user : ${error}`);
+      setAlertClass("fail");
+      setSuccess(false);
+      setShowAlert(true);
+      setLoading(false);
+      return;
+    }
 
     if (signUp) {
       try {

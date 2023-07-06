@@ -69,3 +69,13 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:4000/users/deleteall
+
+###
+
+POST http://localhost:4000/check-user
+Content-Type: application/json
+
+{
+  "email": "joe@gmail.com",
+  "password": "L1234567"
+}
