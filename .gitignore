@@ -8,7 +8,7 @@ firebase-debug.log*
 firebase-debug.*.log*
 
 # Firebase cache
-.firebase/
+.firebase
 
 # Firebase config
 
@@ -78,6 +78,7 @@ coverage
 
 # production
 build
+client/src/firebase.js
 
 # misc
 .env
