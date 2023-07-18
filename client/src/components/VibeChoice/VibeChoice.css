@@ -21,7 +21,6 @@
   padding: 12px;
   padding-top: 36px;
   border-radius: var(--border-radius);
-  /* box-shadow: 0 0 30px 2px #cd587f; */
   background-image: linear-gradient(
     to bottom,
     var(--primary),
@@ -29,11 +28,13 @@
   );
 }
 
-.types.slide-2 {
+.types.slide-2,
+.slide-2 {
   background-image: linear-gradient(to bottom, #58bacd, #3a33ec);
 }
 
-.types.slide-3 {
+.types.slide-3,
+.slide-3 {
   background-image: linear-gradient(to bottom, #d1993f, #33ec33);
 }
 
@@ -43,7 +44,6 @@ h2 {
 
 h3 {
   font-size: 140px;
-  /* margin-top: 35px; */
 }
 
 .swiper {

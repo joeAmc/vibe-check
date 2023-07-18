@@ -10,8 +10,6 @@ import { IoIosPint } from "react-icons/io";
 import { FaCocktail } from "react-icons/fa";
 import { GiMusicalNotes } from "react-icons/gi";
 import Nav from "../Nav/Nav";
-import { AuthContext } from "../../AuthContext";
-import { useContext } from "react";
 
 const types = [
   { id: 1, type: "Cosy Pub", icon: <IoIosPint /> },
@@ -23,11 +21,9 @@ const VibeChoice = () => {
   const [extraClass, setExtraClass] = useState();
   const [selectedType, setSelectedType] = useState("Cosy Pub");
   const navigate = useNavigate();
-  // const { loggedIn } = useContext(AuthContext);
 
   const handleSelect = (type) => {
     const formatedType = type.replaceAll(" ", "_");
-    // navigate(loggedIn ? `/venues/${formatedType}` : `/auth`);
     navigate(`/venues/${formatedType}`);
   };
 
@@ -64,7 +60,12 @@ const VibeChoice = () => {
             })}
           </Swiper>
         </div>
-        <button onClick={() => handleSelect(selectedType)}>Select</button>
+        <button
+          className={`${extraClass}`}
+          onClick={() => handleSelect(selectedType)}
+        >
+          Select
+        </button>
       </div>
     </div>
   );

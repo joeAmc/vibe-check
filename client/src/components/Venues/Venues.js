@@ -13,6 +13,7 @@ const Venues = () => {
   const [selectedVenue, setSelectedVenue] = useState(null);
   const [hasVenuesOfType, setHasVenuesOfType] = useState(false);
   const { loggedIn } = useContext(AuthContext);
+
   const API_URL = process.env.REACT_APP_API;
 
   const removeUnderScoreFromType = type.replaceAll("_", " ");
@@ -78,7 +79,7 @@ const Venues = () => {
     <div>
       <Nav venuesType={type} formatedType={removeUnderScoreFromType} />
       <div className="spacer" />
-      {!loggedIn && <Alert />}
+      {!loggedIn && <Alert text="Log in or Sign up!" backgroundColor="fail" />}
       <div className="venues">
         {hasVenuesOfType && venues.length > 0 ? (
           venues

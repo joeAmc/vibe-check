@@ -1,3 +1,7 @@
+.auth-alert-container.close {
+  display: none;
+}
+
 .alert {
   color: rgb(39, 37, 37);
   margin-top: 32px;
@@ -25,6 +29,10 @@
 .alert.fail {
   background-color: #e95555;
   background-image: linear-gradient(to bottom, #f01616, #dd6464);
+}
+
+.alert.close {
+  display: none;
 }
 
 .alert-info {
