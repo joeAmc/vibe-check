@@ -36,6 +36,28 @@ const Auth = () => {
     setPassword(event.target.value);
   };
 
+  const checkUserExists = async () => {
+    try {
+      const response = await fetch(`${API_URL}/check-user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email }),
+      });
+      const data = await response.json();
+      return data.exists;
+    } catch (error) {
+      console.error(`Failed to check user: ${error}`);
+      setAlertMessage(`Failed to check user: ${error}`);
+      setAlertClass("fail");
+      setSuccess(false);
+      setShowAlert(true);
+      setLoading(false);
+      return false;
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -50,23 +72,9 @@ const Auth = () => {
       return;
     }
 
-    const newUserData = {
-      username: username,
-      email: email,
-      password: password,
-    };
-
-    // Check if username or email already exist in the database
-    try {
-      const response = await fetch(`${API_URL}/check-user`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email }),
-      });
-      const data = await response.json();
-      if (data.exists) {
+    if (signUp) {
+      const userExists = await checkUserExists();
+      if (userExists) {
         console.error("Username or email already exists");
         setAlertMessage("Username or email already exists");
         setAlertClass("fail");
@@ -75,26 +83,25 @@ const Auth = () => {
         setLoading(false);
         return;
       }
-    } catch (error) {
-      console.error(`Failed to check user : ${error}`);
-      setAlertMessage(`Failed to check user : ${error}`);
-      setAlertClass("fail");
-      setSuccess(false);
-      setShowAlert(true);
-      setLoading(false);
-      return;
     }
 
-    if (signUp) {
-      try {
-        const response = await fetch(`${API_URL}/signup`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newUserData),
-        });
-        if (response.ok) {
+    const newUserData = {
+      username: username,
+      email: email,
+      password: password,
+    };
+
+    try {
+      const endpoint = signUp ? `${API_URL}/signup` : `${API_URL}/login`;
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUserData),
+      });
+      if (response.ok) {
+        if (signUp) {
           console.log("New user added successfully!");
           console.log("newUserData", newUserData);
           setAlertMessage("Welcome to Vibe Check!");
@@ -102,49 +109,29 @@ const Auth = () => {
           setSuccess(true);
           setLoggedIn(true);
         } else {
-          console.error("Failed to add Vibe");
-          setAlertMessage("Failed to sign up");
-          setAlertClass("fail");
-          setSuccess(false);
-        }
-      } catch (error) {
-        console.error(`Failed to sign up" : ${error}`);
-        setAlertMessage(`Failed to sign up : ${error}`);
-        setAlertClass("fail");
-        setSuccess(false);
-      }
-      setShowAlert(true);
-      setLoading(false);
-    }
-    if (!signUp) {
-      try {
-        const response = await fetch(`${API_URL}/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-        if (response.ok) {
           console.log("Logged in successfully!");
           setLoggedIn(true);
           navigate("/vibes");
-        } else {
-          console.error("Failed to log in");
-          setAlertMessage("Failed to log in");
-          setAlertClass("fail");
-          setSuccess(false);
-          setShowAlert(true);
         }
-      } catch (error) {
-        console.error(`Failed to log in" : ${error}`);
-        setAlertMessage(`Failed to log in : ${error}`);
+      } else {
+        console.error("Failed to add Vibe");
+        setAlertMessage(signUp ? "Failed to sign up" : "Failed to log in");
         setAlertClass("fail");
         setSuccess(false);
-        setShowAlert(true);
       }
-      setLoading(false);
+    } catch (error) {
+      console.error(
+        `${signUp ? "Failed to sign up" : "Failed to log in"}: ${error}`
+      );
+      setAlertMessage(
+        `${signUp ? "Failed to sign up" : "Failed to log in"}: ${error}`
+      );
+      setAlertClass("fail");
+      setSuccess(false);
     }
+
+    setShowAlert(true);
+    setLoading(false);
   };
 
   return (
