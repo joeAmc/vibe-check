@@ -5,11 +5,6 @@ require("dotenv").config();
 
 const app = express();
 
-// const corsOptions = {
-//   origin: ["https://vibe-check-773b3.web.app", "http://localhost:4000"],
-// };
-// app.use(cors(corsOptions));
-
 app.use(express.json());
 app.use(cors());
 
@@ -18,8 +13,14 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => {
+  .then(async () => {
     console.log(`Connected to database`);
+    const venuesCollection = mongoose.connection.collection("venues");
+    await venuesCollection.createIndex(
+      { timestamp: 1 },
+      { expireAfterSeconds: 3600 }
+    );
+    console.log("TTL index created for the venues collection");
   })
   .catch((err) => {
     console.log("ERROR!!!", err);

@@ -22,8 +22,6 @@ const Auth = () => {
 
   const API_URL = process.env.REACT_APP_API;
 
-  console.log({ showAlert });
-
   const handleUserNameChange = (event) => {
     setUserName(event.target.value);
   };

@@ -7,7 +7,12 @@ const venueSchema = new Schema({
   location: { type: String, required: true },
   vibes: { type: Number, default: 0 },
   image: { type: String, required: true },
-  timestamp: { type: String, default: Date.now },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+    expires: 3600,
+    index: { name: "timestamp_1_1hr" },
+  },
 });
 
 const Venue = mongoose.model("Venue", venueSchema);
