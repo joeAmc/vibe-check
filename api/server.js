@@ -12,10 +12,10 @@ app.use(express.json());
 app.use(cors());
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, "1234", { expiresIn: "1d" });
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
 
-console.log("1234");
+console.log("Secret", process.env.JWT_SECRET);
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -111,7 +111,6 @@ app.post("/signup", async (req, res) => {
     const token = createToken(user._id);
 
     res.status(201).json({ token, email });
-    console.log("token", token);
     console.log("user successfully signed up");
   } catch (error) {
     console.error(`Failed to sign up user: ${error}`);
@@ -127,7 +126,6 @@ app.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
     const token = createToken(user._id);
-    // res.json(user);
     res.json({ token, email });
     console.log("token", token);
     console.log("user successfully logged in");
