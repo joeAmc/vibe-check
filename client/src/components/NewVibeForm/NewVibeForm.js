@@ -100,7 +100,6 @@ const NewVibeForm = () => {
   };
 
   const handleTakePhoto = (dataUri) => {
-    console.log(dataUri);
     fetch(dataUri)
       .then((res) => res.blob())
       .then((blob) => {

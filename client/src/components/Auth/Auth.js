@@ -114,7 +114,6 @@ const Auth = () => {
           navigate("/vibes");
         }
         localStorage.setItem("vibe-check-user", JSON.stringify(json));
-        console.log("json", json);
       } else {
         console.error("Failed to add Vibe");
         setAlertMessage(signUp ? "Failed to sign up" : "Failed to log in");

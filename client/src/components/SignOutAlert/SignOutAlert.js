@@ -14,7 +14,6 @@ const SignOutAlert = ({ text }) => {
   };
 
   const signOutHandler = () => {
-    console.log("clicked signout");
     localStorage.removeItem("vibe-check-user");
     setLoggedIn(false);
     setShowAlert(false);

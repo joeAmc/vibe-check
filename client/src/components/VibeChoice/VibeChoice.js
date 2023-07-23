@@ -29,7 +29,6 @@ const VibeChoice = () => {
 
   const handleSlideChange = (swiper) => {
     const activeSlideId = swiper.activeIndex + 1;
-    console.log(types[swiper.activeIndex].type);
     setSelectedType(types[swiper.activeIndex].type);
     setExtraClass(`slide-${activeSlideId}`);
   };

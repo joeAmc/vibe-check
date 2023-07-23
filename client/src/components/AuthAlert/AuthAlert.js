@@ -18,11 +18,9 @@ const AuthAlert = ({ text, backgroundColor }) => {
 
   return (
     <div className={`auth-alert-container ${closeAlertClass}`}>
-      {/* <div className="alert fail"> */}
       <div className={`alert ${backgroundColor}`}>
         <div className="alert-info">
           <p>{text}</p>
-          {/* <p>Log in or Sign up!</p> */}
           <div className="close-alert" onClick={closeAlertHandler}>
             <RxCrossCircled />
           </div>

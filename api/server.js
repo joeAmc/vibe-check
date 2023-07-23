@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Venue = require("./models/Venue");
 const User = require("./models/User");
-require("dotenv").config();
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const app = express();
 
@@ -14,8 +14,6 @@ app.use(cors());
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
-
-console.log("Secret", process.env.JWT_SECRET);
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -29,7 +27,6 @@ mongoose
       { timestamp: 1 },
       { expireAfterSeconds: 3600 }
     );
-    console.log("1234");
     console.log("TTL index created for the venues collection");
   })
   .catch((err) => {
@@ -107,7 +104,6 @@ app.post("/signup", async (req, res) => {
   try {
     await user.save();
 
-    // create token
     const token = createToken(user._id);
 
     res.status(201).json({ token, email });
@@ -127,7 +123,6 @@ app.post("/login", async (req, res) => {
     }
     const token = createToken(user._id);
     res.json({ token, email });
-    console.log("token", token);
     console.log("user successfully logged in");
   } catch (error) {
     console.error(`Failed to log in user: ${error}`);
