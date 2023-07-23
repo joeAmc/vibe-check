@@ -12,8 +12,10 @@ app.use(express.json());
 app.use(cors());
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+  return jwt.sign({ _id }, "1234", { expiresIn: "1d" });
 };
+
+console.log("1234");
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -27,6 +29,7 @@ mongoose
       { timestamp: 1 },
       { expireAfterSeconds: 3600 }
     );
+    console.log("1234");
     console.log("TTL index created for the venues collection");
   })
   .catch((err) => {
