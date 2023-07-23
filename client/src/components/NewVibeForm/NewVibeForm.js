@@ -15,7 +15,6 @@ import { MdOutlineAddAPhoto } from "react-icons/md";
 const NewVibeForm = () => {
   const { type } = useParams();
   const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
   const [loading, setLoading] = useState(false);
   const [vibes, setVibes] = useState("0");
   const [image, setImage] = useState(null);
@@ -26,8 +25,51 @@ const NewVibeForm = () => {
   const [cameraOn, setCameraOn] = useState(false);
   const [closePreview, setClosePreview] = useState(false);
   const [facingMode, setFacingMode] = useState("user");
+  const [currentLocation, setCurrentLocation] = useState(null);
 
   const API_URL = process.env.REACT_APP_API;
+
+  useEffect(() => {
+    const getLocation = async () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const url = `https://address-from-to-latitude-longitude.p.rapidapi.com/geolocationapi?lat=${latitude}&lng=${longitude}`;
+            const options = {
+              method: "GET",
+              headers: {
+                "X-RapidAPI-Key": process.env.REACT_APP_GEO_API,
+                "X-RapidAPI-Host":
+                  "address-from-to-latitude-longitude.p.rapidapi.com",
+              },
+            };
+            try {
+              const response = await fetch(url, options);
+              const result = await response.text();
+              const resultJSON = JSON.parse(result);
+
+              const city = resultJSON.Results[0].city;
+              const region = resultJSON.Results[0].region;
+
+              const locationText = region ? `${city}, ${region}` : city;
+              setCurrentLocation(locationText);
+            } catch (error) {
+              console.error(error);
+            }
+          },
+          (error) => {
+            console.error("Error getting location:", error);
+          }
+        );
+      } else {
+        console.error("Geolocation is not supported by this browser.");
+      }
+    };
+
+    getLocation();
+  }, []);
 
   useEffect(() => {
     const checkRearCamera = async () => {
@@ -51,10 +93,6 @@ const NewVibeForm = () => {
 
   const handleNameChange = (event) => {
     setName(event.target.value);
-  };
-
-  const handleLocationChange = (event) => {
-    setLocation(event.target.value);
   };
 
   const handleCamera = () => {
@@ -89,7 +127,7 @@ const NewVibeForm = () => {
       const newVenueData = {
         type: type,
         name: name,
-        location: location,
+        location: currentLocation,
         vibes: vibes,
         image: imageUrl,
       };
@@ -163,12 +201,7 @@ const NewVibeForm = () => {
         <br />
         <label>
           Location
-          <input
-            type="text"
-            value={location}
-            onChange={handleLocationChange}
-            required
-          />
+          <input type="text" value={currentLocation} readOnly />
         </label>
         <label>
           <div className="photo-upload">

@@ -98,10 +98,12 @@ const Auth = () => {
         },
         body: JSON.stringify(newUserData),
       });
+
+      const json = await response.json();
+
       if (response.ok) {
         if (signUp) {
           console.log("New user added successfully!");
-          console.log("newUserData", newUserData);
           setAlertMessage("Welcome to Vibe Check!");
           setAlertClass("success");
           setSuccess(true);
@@ -111,6 +113,8 @@ const Auth = () => {
           setLoggedIn(true);
           navigate("/vibes");
         }
+        localStorage.setItem("vibe-check-user", JSON.stringify(json));
+        console.log("json", json);
       } else {
         console.error("Failed to add Vibe");
         setAlertMessage(signUp ? "Failed to sign up" : "Failed to log in");

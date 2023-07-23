@@ -13,6 +13,7 @@ const venueSchema = new Schema({
     expires: 3600,
     index: { name: "timestamp_1_1hr" },
   },
+  checkin_timestamp: { type: String, default: Date.now },
 });
 
 const Venue = mongoose.model("Venue", venueSchema);

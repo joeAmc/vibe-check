@@ -1,12 +1,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const Venue = require("./models/Venue");
+const User = require("./models/User");
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+};
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -27,9 +34,6 @@ mongoose
   });
 
 // venues
-const Venue = require("./models/Venue");
-const User = require("./models/User");
-
 app.get("/venues", async (req, res) => {
   const venues = await Venue.find();
   res.json(venues);
@@ -99,7 +103,12 @@ app.post("/signup", async (req, res) => {
   const user = new User({ username, email, password });
   try {
     await user.save();
-    res.status(201).json(user);
+
+    // create token
+    const token = createToken(user._id);
+
+    res.status(201).json({ token, email });
+    console.log("token", token);
     console.log("user successfully signed up");
   } catch (error) {
     console.error(`Failed to sign up user: ${error}`);
@@ -114,7 +123,10 @@ app.post("/login", async (req, res) => {
     if (!user || user.password !== password) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-    res.json(user);
+    const token = createToken(user._id);
+    // res.json(user);
+    res.json({ token, email });
+    console.log("token", token);
     console.log("user successfully logged in");
   } catch (error) {
     console.error(`Failed to log in user: ${error}`);

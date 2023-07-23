@@ -96,7 +96,7 @@ const Venues = () => {
                   <h4>{venue.location}</h4>
                 </div>
                 <div className="vibe-details">
-                  <h5>Checked in - {formatDate(+venue.timestamp)}</h5>
+                  <h5>Checked in - {formatDate(+venue.checkin_timestamp)}</h5>
                   <div className="vibe-votes">
                     <div
                       onClick={() => handleVibeClicked(venue)}

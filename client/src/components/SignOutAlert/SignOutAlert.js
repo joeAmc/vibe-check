@@ -2,11 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignOutAlert.css";
 import { RxCrossCircled } from "react-icons/rx";
-import { BiLogOutCircle } from "react-icons/bi";
 import { AuthContext } from "../../AuthContext";
 import { useContext } from "react";
 
-const SignOutAlert = ({ text, backgroundColor }) => {
+const SignOutAlert = ({ text }) => {
   const navigate = useNavigate();
   const { showAlert, setShowAlert, setLoggedIn } = useContext(AuthContext);
 
@@ -15,6 +14,8 @@ const SignOutAlert = ({ text, backgroundColor }) => {
   };
 
   const signOutHandler = () => {
+    console.log("clicked signout");
+    localStorage.removeItem("vibe-check-user");
     setLoggedIn(false);
     setShowAlert(false);
     navigate("/");
@@ -31,9 +32,6 @@ const SignOutAlert = ({ text, backgroundColor }) => {
           <div className="signout-btn" onClick={signOutHandler}>
             <p>{text}</p>
           </div>
-          {/* <div className="signout-alert" onClick={signOutHandler}>
-            <BiLogOutCircle />
-          </div> */}
           <div className="close-alert" onClick={cancelSignOutHandler}>
             <RxCrossCircled />
           </div>

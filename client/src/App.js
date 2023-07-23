@@ -6,11 +6,18 @@ import NewVibeForm from "./components/NewVibeForm/NewVibeForm";
 import VibeChoice from "./components/VibeChoice/VibeChoice";
 import Auth from "./components/Auth/Auth";
 import { AuthContext } from "./AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem("vibe-check-user");
+    if (user) {
+      setLoggedIn(true);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
