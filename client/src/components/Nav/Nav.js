@@ -82,8 +82,14 @@ const Nav = ({ venuesType, newVibetype, formatedType, signup, loggedin }) => {
       >
         {navText()}
         <div className="icons">
-          <BiHomeAlt onClick={homeIconHandler} />
-          {loggedIn && <CgProfile onClick={profileIconHandler} />}
+          <button aria-label="home-button" onClick={homeIconHandler}>
+            <BiHomeAlt />
+          </button>
+          {loggedIn && (
+            <button aria-label="profile-button" onClick={profileIconHandler}>
+              <CgProfile onClick={profileIconHandler} />
+            </button>
+          )}
         </div>
       </div>
     </>
