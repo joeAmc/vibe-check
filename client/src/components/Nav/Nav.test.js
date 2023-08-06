@@ -36,5 +36,7 @@ describe("Nav", () => {
     expect(
       screen.getByRole("heading", { name: "todays vibe" })
     ).toBeInTheDocument();
+
+    // screen.debug();
   });
 });

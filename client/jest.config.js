@@ -1,6 +1,10 @@
 module.exports = {
-  transform: {
-    "^.+\\.(js|jsx)$": "babel-jest",
+  testEnvironment: "jsdom",
+  //   transform: {
+  //     "^.+\\.(js|jsx)$": "esbuild-jest",
+  //   },
+  transformIgnorePatterns: ["/node_modules/(?!swiper)"],
+  moduleNameMapper: {
+    "\\.(css|less)$": "<rootDir>/cssMock.js",
   },
-  transformIgnorePatterns: ["node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)"],
 };

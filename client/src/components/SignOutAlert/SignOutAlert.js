@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./SignOutAlert.css";
+// import "./SignOutAlert.css";
 import { RxCrossCircled } from "react-icons/rx";
 import { AuthContext } from "../../AuthContext";
 import { useContext } from "react";
