@@ -59,5 +59,7 @@ describe("New vibe form", () => {
     expect(
       screen.getByRole("button", { name: "Check Vibe In" })
     ).toBeInTheDocument();
+
+    // assert form validation works
   });
 });

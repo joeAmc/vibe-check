@@ -10,7 +10,8 @@ describe("Nav", () => {
     const contextValue = {
       loggedIn: true,
       showAlert: true,
-      setShowAlert: () => {},
+      setShowAlert: jest.fn(),
+      setLoggedIn: jest.fn(),
     };
 
     render(
@@ -42,11 +43,16 @@ describe("Nav", () => {
     const profileIcon = screen.getByRole("button", { name: "profile-button" });
     expect(profileIcon).toBeInTheDocument();
     fireEvent.click(profileIcon);
-    expect(screen.getByText("Sign Out?")).toBeInTheDocument();
 
     const closeAlertButton = screen.getByRole("button", {
       name: "close-signout-btn",
     });
     expect(closeAlertButton).toBeInTheDocument();
+
+    const signOutButton = screen.getByText("Sign Out?");
+    expect(signOutButton).toBeInTheDocument();
+    fireEvent.click(signOutButton);
+
+    expect(contextValue.setLoggedIn).toHaveBeenCalledWith(false);
   });
 });

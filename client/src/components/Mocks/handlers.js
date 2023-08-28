@@ -32,18 +32,4 @@ export const handlers = [
       ])
     );
   }),
-  rest.post("http://localhost:4000/venue/new", (req, res, ctx) => {
-    console.log("Mock request intercepted:", req.url.href);
-    return res(
-      ctx.json([
-        {
-          type: "Cosy Pub",
-          name: "The Adam and Eve",
-          location: "Southampton, United Kingdom",
-          image:
-            "http://www.royaloaklondon.co.uk/wp-content/uploads/2014/10/royal-oak-1.jpg",
-        },
-      ])
-    );
-  }),
 ];
