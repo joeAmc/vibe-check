@@ -1,10 +1,10 @@
 module.exports = {
   testEnvironment: "jsdom",
-  //   transform: {
-  //     "^.+\\.(js|jsx)$": "esbuild-jest",
-  //   },
-  transformIgnorePatterns: ["/node_modules/(?!swiper)"],
   moduleNameMapper: {
     "\\.(css|less)$": "<rootDir>/cssMock.js",
   },
+  transform: {
+    "^.+\\.[t|j]sx?$": "babel-jest",
+  },
+  transformIgnorePatterns: ["node_modules/(?!swiper|ssr-window|dom7).*/"],
 };

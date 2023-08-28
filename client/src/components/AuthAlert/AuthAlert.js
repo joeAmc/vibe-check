@@ -21,9 +21,13 @@ const AuthAlert = ({ text, backgroundColor }) => {
       <div className={`alert ${backgroundColor}`}>
         <div className="alert-info">
           <p>{text}</p>
-          <div className="close-alert" onClick={closeAlertHandler}>
+          <button
+            className="close-alert"
+            onClick={closeAlertHandler}
+            aria-label="close-alert"
+          >
             <RxCrossCircled />
-          </div>
+          </button>
         </div>
       </div>
       <div className="alert-backdrop"></div>

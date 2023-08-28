@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import "./SignOutAlert.css";
+import "./SignOutAlert.css";
 import { RxCrossCircled } from "react-icons/rx";
 import { AuthContext } from "../../AuthContext";
 import { useContext } from "react";
@@ -31,9 +31,13 @@ const SignOutAlert = ({ text }) => {
           <div className="signout-btn" onClick={signOutHandler}>
             <p>{text}</p>
           </div>
-          <div className="close-alert" onClick={cancelSignOutHandler}>
+          <button
+            aria-label="close-signout-btn"
+            className="close-alert"
+            onClick={cancelSignOutHandler}
+          >
             <RxCrossCircled />
-          </div>
+          </button>
         </div>
       </div>
       <div className="alert-backdrop"></div>

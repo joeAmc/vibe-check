@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./VibeChoice.css";
 import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react/swiper-react.js";
 import "swiper/css";
 import "swiper/css/pagination";
 import { IoIosPint } from "react-icons/io";

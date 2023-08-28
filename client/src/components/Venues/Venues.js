@@ -16,11 +16,14 @@ const Venues = () => {
 
   const API_URL = process.env.REACT_APP_API;
 
-  const removeUnderScoreFromType = type.replaceAll("_", " ");
+  const formattedType = type?.replaceAll("_", " ");
 
   useEffect(() => {
     getVenues();
   }, []);
+
+  console.log("venues", venues);
+  console.log("API_URL", `${API_URL}/venues`);
 
   const getVenues = () => {
     fetch(`${API_URL}/venues`)
@@ -29,6 +32,9 @@ const Venues = () => {
         const filteredVenues = data.filter(
           (venue) => venue.type === type && venue.vibes >= 0
         );
+        const venuesUnfiltered = data;
+        console.log("venuesUnfiltered", venuesUnfiltered);
+        console.log("filteredVenues", filteredVenues);
         setVenues(filteredVenues);
         setHasVenuesOfType(filteredVenues.length > 0);
       })
@@ -77,41 +83,39 @@ const Venues = () => {
 
   return (
     <div>
-      <Nav venuesType={type} formatedType={removeUnderScoreFromType} />
+      <Nav venuesType={type} formatedType={formattedType} />
       <div className="spacer" />
       {!loggedIn && <Alert text="Log in or Sign up!" backgroundColor="fail" />}
       <div className="venues">
         {hasVenuesOfType && venues.length > 0 ? (
-          venues
-            .filter((venue) => venue.type === type && venue.vibes >= 0)
-            .reverse()
-            .map((venue) => (
-              <div className="venue-container" key={venue._id}>
-                <div className="checkbox"></div>
-                <div className="venue-img">
-                  <img src={venue.image} alt="pub" />
-                </div>
-                <div className="name">
-                  <h2>{venue.name}</h2>
-                  <h4>{venue.location}</h4>
-                </div>
-                <div className="vibe-details">
-                  <h5>Checked in - {formatDate(+venue.checkin_timestamp)}</h5>
-                  <div className="vibe-votes">
-                    <div
-                      onClick={() => handleVibeClicked(venue)}
-                      className={`vibe-icon ${
-                        veriVibed &&
-                        selectedVenue &&
-                        selectedVenue._id === venue._id &&
-                        "selected"
-                      }`}
-                    ></div>
-                    <h5>{venue.vibes}</h5>
-                  </div>
+          venues.reverse().map((venue) => (
+            <div className="venue-container" key={venue._id}>
+              <div className="checkbox"></div>
+              <div className="venue-img">
+                <img src={venue.image} alt="pub" />
+              </div>
+              <div className="name">
+                <h2>{venue.name}</h2>
+                <h4>{venue.location}</h4>
+              </div>
+              <div className="vibe-details">
+                <h5>Checked in - {formatDate(+venue.checkin_timestamp)}</h5>
+                <div className="vibe-votes">
+                  <button
+                    aria-label="vibe-votes"
+                    onClick={() => handleVibeClicked(venue)}
+                    className={`vibe-icon ${
+                      veriVibed &&
+                      selectedVenue &&
+                      selectedVenue._id === venue._id &&
+                      "selected"
+                    }`}
+                  ></button>
+                  <h5>{venue.vibes}</h5>
                 </div>
               </div>
-            ))
+            </div>
+          ))
         ) : (
           <h1>No current vibes</h1>
         )}

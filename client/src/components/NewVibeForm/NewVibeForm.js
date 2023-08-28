@@ -49,6 +49,7 @@ const NewVibeForm = () => {
               const response = await fetch(url, options);
               const result = await response.text();
               const resultJSON = JSON.parse(result);
+              console.log("result", result);
 
               const city = resultJSON.Results[0].city;
               const region = resultJSON.Results[0].region;

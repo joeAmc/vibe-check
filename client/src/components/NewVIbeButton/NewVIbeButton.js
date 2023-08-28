@@ -1,6 +1,6 @@
 import React from "react";
 import { FaPlus } from "react-icons/fa";
-// import "./NewVIbeButton.css";
+import "./NewVIbeButton.css";
 import { Link } from "react-router-dom";
 
 const NewVIbeButton = ({ type }) => {

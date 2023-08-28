@@ -11,6 +11,6 @@ describe("VibeChoice", () => {
         <VibeChoice />
       </BrowserRouter>
     );
-    // screen.debug();
+    screen.debug();
   });
 });

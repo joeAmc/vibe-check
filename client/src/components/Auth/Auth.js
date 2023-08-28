@@ -136,80 +136,82 @@ const Auth = () => {
   };
 
   return (
-    <div className="signup-container">
+    <>
       <Nav signup={signUp} />
-      <div className="spacer" />
-      {showAlert && (
-        <AuthAlert
-          text={alertMessage}
-          backgroundColor={alertClass}
-          success={success}
-          showAlert={showAlert}
-        />
-      )}
-      {loading && (
-        <>
-          <div className="loader">
-            <Bars
-              height="80"
-              width="80"
-              radius="9"
-              color="var(--primary)"
-              ariaLabel="bars-loading"
-              wrapperStyle
-              wrapperClass
-            />
-          </div>
-          <div className="alert-backdrop"></div>
-        </>
-      )}
-      <form onSubmit={handleSubmit}>
-        {signUp && (
+      <div className="signup-container">
+        <div className="spacer" />
+        {showAlert && (
+          <AuthAlert
+            text={alertMessage}
+            backgroundColor={alertClass}
+            success={success}
+            showAlert={showAlert}
+          />
+        )}
+        {loading && (
+          <>
+            <div className="loader">
+              <Bars
+                height="80"
+                width="80"
+                radius="9"
+                color="var(--primary)"
+                ariaLabel="bars-loading"
+                wrapperStyle
+                wrapperClass
+              />
+            </div>
+            <div className="alert-backdrop"></div>
+          </>
+        )}
+        <form onSubmit={handleSubmit}>
+          {signUp && (
+            <p>
+              <label htmlFor="username">User Name</label>
+              <input
+                id="username"
+                type="username"
+                name="username"
+                onChange={handleUserNameChange}
+                required
+              />
+            </p>
+          )}
           <p>
-            <label htmlFor="username">User Name</label>
+            <label htmlFor="email">Email</label>
             <input
-              id="username"
-              type="username"
-              name="username"
-              onChange={handleUserNameChange}
+              id="email"
+              type="email"
+              name="email"
+              onChange={handleEmailChange}
               required
             />
           </p>
-        )}
-        <p>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            onChange={handleEmailChange}
-            required
-          />
-        </p>
-        <p>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            onChange={handlePasswordChange}
-            required
-          />
-        </p>
-        <div>
-          <button type="submit">{signUp ? "Sign up" : "Log in"}</button>
-        </div>
+          <p>
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              onChange={handlePasswordChange}
+              required
+            />
+          </p>
+          <div>
+            <button type="submit">{signUp ? "Sign up" : "Log in"}</button>
+          </div>
 
-        <div className="signup-text">
-          <h4>
-            {signUp ? "Already have an account?" : "Don't have an account?"}
-          </h4>
-          <Link to={`?mode=${!signUp ? "signup" : "login"}`}>
-            <h5>{signUp ? "Log in" : "Sign up"}</h5>
-          </Link>
-        </div>
-      </form>
-    </div>
+          <div className="signup-text">
+            <h4>
+              {signUp ? "Already have an account?" : "Don't have an account?"}
+            </h4>
+            <Link to={`?mode=${!signUp ? "signup" : "login"}`}>
+              <h5>{signUp ? "Log in" : "Sign up"}</h5>
+            </Link>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

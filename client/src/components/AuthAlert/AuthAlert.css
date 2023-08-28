@@ -40,6 +40,14 @@
   justify-content: space-between;
   align-items: center;
 }
+.alert-info button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(39, 37, 37);
+  background: transparent;
+  width: auto;
+}
 
 .close-alert {
   display: flex;

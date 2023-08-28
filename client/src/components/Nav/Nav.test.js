@@ -6,10 +6,11 @@ import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 
 describe("Nav", () => {
-  it("renders Nav correctly", () => {
+  it("renders Nav correctly", async () => {
     const contextValue = {
       loggedIn: true,
-      setShowAlert: jest.fn(),
+      showAlert: true,
+      setShowAlert: () => {},
     };
 
     render(
@@ -37,6 +38,15 @@ describe("Nav", () => {
       screen.getByRole("heading", { name: "todays vibe" })
     ).toBeInTheDocument();
 
-    // screen.debug();
+    //assert sign out alert is rendered when clicking profile icon
+    const profileIcon = screen.getByRole("button", { name: "profile-button" });
+    expect(profileIcon).toBeInTheDocument();
+    fireEvent.click(profileIcon);
+    expect(screen.getByText("Sign Out?")).toBeInTheDocument();
+
+    const closeAlertButton = screen.getByRole("button", {
+      name: "close-signout-btn",
+    });
+    expect(closeAlertButton).toBeInTheDocument();
   });
 });

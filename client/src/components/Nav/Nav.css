@@ -21,11 +21,18 @@
 }
 
 .icons {
+  display: flex;
+}
+
+.nav-container .icons button {
+  color: white;
   font-size: 38px;
   padding-left: 10px;
-  color: white;
   display: flex;
   align-items: center;
+  background: transparent;
+  border: none;
+  margin-top: none;
 }
 
 .icons svg {
