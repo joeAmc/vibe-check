@@ -2,7 +2,6 @@ import { rest } from "msw";
 
 export const handlers = [
   rest.get("http://localhost:4000/venues", (req, res, ctx) => {
-    console.log("Mock request intercepted:", req.url.href);
     return res(
       ctx.json([
         {
@@ -30,6 +29,30 @@ export const handlers = [
           __v: 1,
         },
       ])
+    );
+  }),
+  rest.post(
+    `${process.env.REACT_APP_API}/check-user`,
+    function* (req, res, ctx) {
+      yield res(ctx.json({ exists: true }));
+      return res(ctx.json({ exists: false }));
+    }
+  ),
+  rest.post(`${process.env.REACT_APP_API}/signup`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        username: "testUserName",
+        email: "test@example.com",
+        password: "testPassword",
+      })
+    );
+  }),
+  rest.post(`${process.env.REACT_APP_API}/login`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        email: "test@example.com",
+        password: "testPassword",
+      })
     );
   }),
 ];
