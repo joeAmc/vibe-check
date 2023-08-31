@@ -1,9 +1,16 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import VibeChoice from "../VibeChoice";
+import { BrowserRouter } from "react-router-dom";
 
 describe("VibeChoice", () => {
-  it("renders the VibeChoice component", () => {
-    render(<VibeChoice />);
+  test("renders VibeChoice component", () => {
+    render(
+      <BrowserRouter>
+        <VibeChoice />
+      </BrowserRouter>
+    );
+    screen.debug();
   });
 });

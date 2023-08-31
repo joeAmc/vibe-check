@@ -55,4 +55,15 @@ export const handlers = [
       })
     );
   }),
+  rest.post(`${process.env.REACT_APP_API}/venue/new`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        type: "Cosy_Pub",
+        name: "Test Pub",
+        location: "Southampton, United Kingdom",
+        image:
+          "http://www.royaloaklondon.co.uk/wp-content/uploads/2014/10/royal-oak-1.jpg",
+      })
+    );
+  }),
 ];

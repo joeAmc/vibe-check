@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  render,
-  screen,
-  fireEvent,
-  logRoles,
-  waitFor,
-} from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
-import { AuthContext } from "../../AuthContext";
+import { AuthContext } from "../../../AuthContext";
 import "@testing-library/jest-dom";
-import Venues from "./Venues";
-import Auth from "../Auth/Auth";
+import Venues from "../Venues";
+import Auth from "../../Auth/Auth";
 import { setupServer } from "msw/node";
-import { handlers } from "../Mocks/handlers";
+import { handlers } from "../../Mocks/handlers";
 import "whatwg-fetch";
 
 const server = setupServer(...handlers);

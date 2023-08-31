@@ -1,7 +1,7 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import Nav from "./Nav";
-import { AuthContext } from "../../AuthContext";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import Nav from "../Nav";
+import { AuthContext } from "../../../AuthContext";
 import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 
@@ -51,8 +51,12 @@ describe("Nav", () => {
 
     const signOutButton = screen.getByText("Sign Out?");
     expect(signOutButton).toBeInTheDocument();
-    fireEvent.click(signOutButton);
 
+    fireEvent.click(closeAlertButton);
+    expect(contextValue.setShowAlert).toHaveBeenCalledWith(false);
+
+    fireEvent.click(profileIcon);
+    fireEvent.click(signOutButton);
     expect(contextValue.setLoggedIn).toHaveBeenCalledWith(false);
   });
 });

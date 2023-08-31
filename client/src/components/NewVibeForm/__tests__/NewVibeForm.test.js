@@ -7,11 +7,11 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
-import { AuthContext } from "../../AuthContext";
+import { AuthContext } from "../../../AuthContext";
 import "@testing-library/jest-dom";
-import NewVibeForm from "./NewVibeForm";
+import NewVibeForm from "../NewVibeForm";
 import { setupServer } from "msw/node";
-import { handlers } from "../Mocks/handlers";
+import { handlers } from "../../Mocks/handlers";
 import "whatwg-fetch";
 
 const server = setupServer(...handlers);
@@ -48,18 +48,25 @@ describe("New vibe form", () => {
     expect(screen.getByText(/check in/i)).toBeInTheDocument();
     expect(screen.getByText(/where's the vibe\?/i)).toBeInTheDocument();
 
-    // assert fields and submit button labels are correct
-    expect(
-      screen.getByRole("textbox", { name: "Vibe Type" })
-    ).toBeInTheDocument();
-    expect(screen.getByRole("textbox", { name: "Name" })).toBeInTheDocument();
-    expect(
-      screen.getByRole("textbox", { name: "Location" })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Check Vibe In" })
-    ).toBeInTheDocument();
+    // assert vibe type is automatically selected
+    const vibeType = screen.getByLabelText("Vibe Type");
+    expect(vibeType).toHaveValue("Cosy Pub");
 
-    // assert form validation works
+    // fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+
+    const nameInput = screen.getByLabelText("Name");
+    expect(nameInput).toHaveValue("");
+    fireEvent.change(nameInput, { target: { value: "Test Pub" } });
+
+    const locationInput = screen.getByLabelText("Location");
+    expect(locationInput).toHaveValue("");
+    fireEvent.change(locationInput, {
+      target: { value: "Southampton, United Kingdom" },
+    });
+
+    const submitButton = screen.getByRole("button", { name: "Check Vibe In" });
+    // fireEvent.click(submitButton);
+
+    // screen.debug();
   });
 });
