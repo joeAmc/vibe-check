@@ -3,8 +3,11 @@
   --secondary: #8a4efc;
   --light: #eee;
   --light-alt: #61759b;
+  /* --light-alt: #53687e; */
   --dark: #131a26;
+  /* --dark: #262d37; */
   --dark-alt: #202b3e;
+  /* --dark-alt: #3c485e; */
   --box-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
   --transition: all 400ms ease;
   --border-radius: 8px;
